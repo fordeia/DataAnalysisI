@@ -9,3 +9,9 @@ plot(data$Years_Exp, data$Salary,
      xlab = "Years Experienced",
      ylab = "Salary",
      main = "Scatter Plot of Years Experienced vs Salary")
+
+# Fitting Simple Linear Regression to the Training set
+lm.r= lm(formula = Salary ~ Years_Exp,
+         data = data)
+#Summary of the model
+summary(lm.r)

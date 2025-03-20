@@ -15,3 +15,7 @@ lm.r= lm(formula = Salary ~ Years_Exp,
          data = data)
 #Summary of the model
 summary(lm.r)
+
+#Testing the normality assumption or the residual using a Q-Q plot
+qqnorm(residuals(lm.r))
+qqline(residuals(lm.r), col = "steelblue", lwd = 2)

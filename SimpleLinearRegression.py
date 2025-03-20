@@ -1,4 +1,5 @@
 #Simple linear regression in Python
+# x is work experience and y is salary
 import numpy as np
 from sklearn.linear_model import LinearRegression
 x = np.array([1.1, 1.3, 1.5, 2.0, 2.2, 2.9, 3.0, 3.2, 3.2, 3.7]).reshape((-1, 1))
@@ -10,3 +11,9 @@ model = LinearRegression().fit(x, y)
 #Obtaining R square
 r_sq = model.score(x, y)
 print(f"coefficient of determination: {r_sq}")
+
+#Obtaining the intercept
+print(f"intercept: {model.intercept_}")
+
+#Obtaining the slope
+print(f"slope: {model.coef_}")

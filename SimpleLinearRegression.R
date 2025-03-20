@@ -4,17 +4,20 @@ data <- data.frame(
   Salary = c(39343.00, 46205.00, 37731.00, 43525.00,
              39891.00, 56642.00, 60150.00, 54445.00, 64445.00, 57189.00)
 )
-# Create the scatter plot
-plot(data$Years_Exp, data$Salary,
-     xlab = "Years Experienced",
-     ylab = "Salary",
-     main = "Scatter Plot of Years Experienced vs Salary")
 
 # Fitting Simple Linear Regression to the Training set
 lm.r= lm(formula = Salary ~ Years_Exp,
          data = data)
 #Summary of the model
 summary(lm.r)
+
+#Testing the assumptions of the model
+
+# Create the scatter plot to test the linearity assumption
+plot(data$Years_Exp, data$Salary,
+     xlab = "Years Experienced",
+     ylab = "Salary",
+     main = "Scatter Plot of Years Experienced vs Salary")
 
 #Testing the normality assumption of the residual using a Q-Q plot and the Shapiro Wilk test
 qqnorm(residuals(lm.r))

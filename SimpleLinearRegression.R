@@ -20,6 +20,7 @@ plot(data$Years_Exp, data$Salary,
      main = "Scatter Plot of Years Experienced vs Salary")
 
 # Test for linearity using Rainbow test
+library(lmtest)
 rain <- raintest(Salary ~ Years_Exp,data=data)
 rain
 

@@ -19,6 +19,10 @@ plot(data$Years_Exp, data$Salary,
      ylab = "Salary",
      main = "Scatter Plot of Years Experienced vs Salary")
 
+# Test for linearity using Rainbow test
+rain <- raintest(Salary ~ Years_Exp,data=data)
+rain
+
 #Testing the normality assumption of the residuals using a Q-Q plot and the Shapiro Wilk test
 qqnorm(residuals(lm.r))
 qqline(residuals(lm.r), col = "steelblue", lwd = 2)

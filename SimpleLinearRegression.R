@@ -26,4 +26,7 @@ qqline(residuals(lm.r), col = "steelblue", lwd = 2)
 #Testing the normality assumption of the residuals using the Shapiro-Wilk test
 shapiro.test(residuals(lm.r))
 
+#Making predictions
+predictions <- predict(lm.r, newdata = Years_Exp)
+
 

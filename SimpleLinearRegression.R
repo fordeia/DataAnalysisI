@@ -19,11 +19,11 @@ plot(data$Years_Exp, data$Salary,
      ylab = "Salary",
      main = "Scatter Plot of Years Experienced vs Salary")
 
-#Testing the normality assumption of the residual using a Q-Q plot and the Shapiro Wilk test
+#Testing the normality assumption of the residuals using a Q-Q plot and the Shapiro Wilk test
 qqnorm(residuals(lm.r))
 qqline(residuals(lm.r), col = "steelblue", lwd = 2)
 
-#Testing the normality assumption of the residual using the Shapiro-Wilk test
+#Testing the normality assumption of the residuals using the Shapiro-Wilk test
 shapiro.test(residuals(lm.r))
 
 

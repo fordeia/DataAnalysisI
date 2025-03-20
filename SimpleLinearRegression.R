@@ -27,6 +27,6 @@ qqline(residuals(lm.r), col = "steelblue", lwd = 2)
 shapiro.test(residuals(lm.r))
 
 #Making predictions
-predictions <- predict(lm.r, newdata = Years_Exp)
-
+predictions <- predict(lm.r, newdata = data$Years_Exp)
+predictions
 

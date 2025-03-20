@@ -17,3 +17,8 @@ print(f"intercept: {model.intercept_}")
 
 #Obtaining the slope
 print(f"slope: {model.coef_}")
+
+#Making predictions
+y_pred = model.intercept_ + model.coef_ * x
+print(f"predicted response:\n{y_pred}")
+

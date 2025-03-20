@@ -16,6 +16,11 @@ lm.r= lm(formula = Salary ~ Years_Exp,
 #Summary of the model
 summary(lm.r)
 
-#Testing the normality assumption or the residual using a Q-Q plot
+#Testing the normality assumption of the residual using a Q-Q plot and the Shapiro Wilk test
 qqnorm(residuals(lm.r))
 qqline(residuals(lm.r), col = "steelblue", lwd = 2)
+
+#Testing the normality assumption of the residual using the Shapiro-Wilk test
+shapiro.test(residuals(lm.r))
+
+

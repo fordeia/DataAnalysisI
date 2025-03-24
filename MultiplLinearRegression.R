@@ -19,3 +19,10 @@ plot(model, which=2)
 
 #Testing the normality assumption using a histogram
 hist(residuals(model))
+
+#Use the variance inflated factor to test for multicollinearity. 
+install.packages("usdm")
+install.packages("car")
+library(usdm)
+library(car)
+vif(model)

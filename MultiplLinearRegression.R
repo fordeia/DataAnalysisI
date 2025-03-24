@@ -10,3 +10,7 @@ summary(model)
 #Removing the insignificant variable and refitting the model
 model  <- lm(sales ~ youtube + facebook, data = marketing)
 summary(model)
+
+#Use a residual plot to test the linearity and homoskedasticity (equal variance) assumptions.
+#residual plot
+plot(model, which=1)

@@ -21,8 +21,6 @@ plot(model, which=2)
 hist(residuals(model))
 
 #Use the variance inflated factor to test for multicollinearity. 
-install.packages("usdm")
-install.packages("car")
 library(usdm)
 library(car)
 vif(model)

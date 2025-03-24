@@ -12,5 +12,7 @@ model  <- lm(sales ~ youtube + facebook, data = marketing)
 summary(model)
 
 #Use a residual plot to test the linearity and homoskedasticity (equal variance) assumptions.
-#residual plot
 plot(model, which=1)
+
+#Use a normal probability plot to test the normality assumption.
+plot(model, which=2)

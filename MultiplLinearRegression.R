@@ -16,3 +16,6 @@ plot(model, which=1)
 
 #Use a normal probability plot to test the normality assumption.
 plot(model, which=2)
+
+#Testing the normality assumption using a histogram
+hist(residuals(model))

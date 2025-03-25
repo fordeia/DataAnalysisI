@@ -6,3 +6,6 @@ head(CropData, 10)
 one.way <- aov(yield ~ fertilizer, data = CropData)
 summary(one.way)
 
+#Table of fertilizer data
+table(CropData$fertilizer)
+

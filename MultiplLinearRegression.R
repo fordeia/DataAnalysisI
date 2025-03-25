@@ -3,7 +3,7 @@ library(tidyverse)
 data("marketing", package = "datarium")
 head(marketing)
 
-#Fitting the model
+#Fitting the multiple linear regression model
 model <- lm(sales ~ youtube + facebook + newspaper, data = marketing)
 summary(model)
 

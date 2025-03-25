@@ -6,7 +6,7 @@ data = pd.read_excel(r"C:/Users/fordeia/DataAnalysisI/marketingData.xlsx")
 df = pd.DataFrame(data)
 # Define the dependent and independent variables
 Y = df['sales']
-X = df[['youtube', 'facebook','newspaper']]
+X = df[['youtube', 'facebook']]
 
 # Add a constant to the independent variables (for the intercept)
 X = sm.add_constant(X)

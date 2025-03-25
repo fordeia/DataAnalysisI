@@ -4,4 +4,4 @@ head(marketing)
 
 #Writing to an excel file. 
 library(openxlsx)
-write.xlsx(marketing, 'C:/Users/fordeia/DataAnalysisI/marketingData.xlsx')
+write.xlsx(marketing, 'C:/Users/fordeia/Desktop/marketingData.xlsx')

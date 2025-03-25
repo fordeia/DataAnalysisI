@@ -4,3 +4,5 @@ head(CropData)
 
 #Fitting the oneway model
 one.way <- aov(yield ~ fertilizer, data = CropData)
+summary(one.way)
+

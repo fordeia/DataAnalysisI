@@ -37,3 +37,7 @@ var.test(Men_bodyfat, Women_bodyfat)
 
 #Two sample t-test
 t.test(Men_bodyfat, Women_bodyfat, var.equal = TRUE)
+
+#Loading heart data
+heart_data <-read.table("heart_data.txt",header =TRUE,sep="\t", fill = TRUE)
+head(heart_data)

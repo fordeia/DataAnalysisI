@@ -57,4 +57,9 @@ hist(residuals(model))
 #Shapiro-Wilk test for normality
 shapiro.test(residuals(model))
 
+#Use the variance inflated factor to test for multicollinearity. 
+library(usdm)
+library(car)
+vif(model)
+
 

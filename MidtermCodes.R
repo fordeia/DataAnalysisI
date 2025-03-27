@@ -12,5 +12,12 @@ length(Women_bodyfat)
 mean(Women_bodyfat) 
 sd(Women_bodyfat) 
 
+# combine two vectors using cbind 
+# function 
+bodyfat_data=cbind(Men_bodyfat,Women_bodyfat) 
+  
+# boxplot 
+boxplot(bodyfat_data,beside=T) 
+
 Two sample t-test
 t.test(Men_bodyfat, Women_bodyfat, var.equal = TRUE)

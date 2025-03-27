@@ -13,14 +13,15 @@ mean(Women_bodyfat)
 sd(Women_bodyfat) 
 
 # combine two vectors using cbind 
-  if (nrow(Men_bodyfat) < nrow(Women_bodyfat)) {
-        # Pad Men_bodyfat with NA rows
-        Men_bodyfat <- rbind(Men_bodyfat, matrix(NA, nrow = nrow(Women_bodyfat) - nrow(Men_bodyfat), ncol = ncol(Men_bodyfat)))
-    } else if (nrow(Women_bodyfat) < nrow(Men_bodyfat)) {
-        # Pad Women_bodyfat with NA rows
-        Women_bodyfat <- rbind(Women_bodyfat, matrix(NA, nrow = nrow(Men_bodyfat) - nrow(Women_bodyfat), ncol = ncol(Women_bodyfat)))
-    }
+ #calculate max length of vectors
+max_length <- max(length(Men_bodyfat), length(Women_bodyfat))
+
+#set length of each vector equal to max length
+length(Men_bodyfat) <- max_length                      
+length(Women_bodyfat) <- max_length
+
 bodyfat_data=cbind(Men_bodyfat,Women_bodyfat) 
+bodyfat_data
   
 # boxplot 
 boxplot(bodyfat_data,beside=T) 

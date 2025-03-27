@@ -54,3 +54,7 @@ plot(model, which=2)
 #Testing the normality assumption using a histogram
 hist(residuals(model))
 
+#Shapiro-Wilk test for normality
+shapiro.test(residuals(model))
+
+

@@ -41,3 +41,6 @@ t.test(Men_bodyfat, Women_bodyfat, var.equal = TRUE)
 #Loading heart data
 heart_data <-read.table("heart_data.txt",header =TRUE,sep="\t", fill = TRUE)
 head(heart_data)
+
+model <- lm(heart.disease ~ biking + smoking, data = heart_data)
+summary(model)

@@ -26,11 +26,14 @@ bodyfat_data
 # boxplot 
 boxplot(bodyfat_data,beside=T) 
 
-#Two sample t-test
-t.test(Men_bodyfat, Women_bodyfat, var.equal = TRUE)
-
 # Shapiro-Wilk normality test for Men's body fat
 shapiro.test(Men_bodyfat)
 
 # Shapiro-Wilk normality test for Women's body fat
 shapiro.test(Women_bodyfat)
+
+#Equal variance test
+var.test(Men_bodyfat, Women_bodyfat)
+
+#Two sample t-test
+t.test(Men_bodyfat, Women_bodyfat, var.equal = TRUE)

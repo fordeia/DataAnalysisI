@@ -44,3 +44,7 @@ head(heart_data)
 
 model <- lm(heart.disease ~ biking + smoking, data = heart_data)
 summary(model)
+
+#Use a residual plot to test the linearity and homoskedasticity (equal variance) assumptions.
+plot(model, which=1)
+

@@ -6,6 +6,7 @@ qqnorm(x)
 qqline(x)
 
 #One sample t-test
+x <- c(28,29,35,37,32,26,37,39,22,29,36,38)
 t.test(x, mu = 28, alternative = "two.sided")
 
 #Two sample t test

@@ -24,3 +24,22 @@ print("p-value:", p_value)
 #Two sample t test
 Men_bodyfat = [13.3,6,20,8,14,19,18,25,16,24,15,1,15]
 Women_bodyfat = [22,16,21.7,21,30,12,23.2,28,23]
+
+#Count, mean and standard deviation
+#Men 
+#length(Men_bodyfat) 
+#mean(Men_bodyfat) 
+#sd(Men_bodyfat) 
+#Women
+#length(Women_bodyfat) 
+#mean(Women_bodyfat) 
+#sd(Women_bodyfat) 
+
+import statistics
+#Men
+mean_value_stats_men = statistics.mean(Men_bodyfat)
+print(f"mean: {mean_value_stats_men}")
+
+#Men
+mean_value_stats_women = statistics.mean(Men_bodyfat)
+print(f"mean: {mean_value_stats_women}")

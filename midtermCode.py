@@ -40,6 +40,6 @@ import statistics
 mean_value_stats_men = statistics.mean(Men_bodyfat)
 print(f"mean_men: {mean_value_stats_men}")
 
-#Men
+#Women
 mean_value_stats_women = statistics.mean(Women_bodyfat)
 print(f"mean_women: {mean_value_stats_women}")

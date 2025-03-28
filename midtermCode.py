@@ -38,8 +38,8 @@ Women_bodyfat = [22,16,21.7,21,30,12,23.2,28,23]
 import statistics
 #Men
 mean_value_stats_men = statistics.mean(Men_bodyfat)
-print(f"mean: {mean_value_stats_men}")
+print(f"mean_men: {mean_value_stats_men}")
 
 #Men
-mean_value_stats_women = statistics.mean(Men_bodyfat)
-print(f"mean: {mean_value_stats_women}")
+mean_value_stats_women = statistics.mean(Women_bodyfat)
+print(f"mean_women: {mean_value_stats_women}")

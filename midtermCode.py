@@ -39,7 +39,11 @@ import statistics
 #Men
 mean_value_stats_men = statistics.mean(Men_bodyfat)
 print(f"mean_men: {mean_value_stats_men}")
+std_dev_sample = statistics.stdev(Men_bodyfat)
+print(f"Sample standard deviation: {std_dev_sample}")
 
 #Women
 mean_value_stats_women = statistics.mean(Women_bodyfat)
 print(f"mean_women: {mean_value_stats_women}")
+std_dev_sample = statistics.stdev(Women_bodyfat)
+print(f"Sample standard deviation: {std_dev_sample}")

@@ -124,3 +124,10 @@ plt.ylabel('Residuals')
 plt.title('Residual Plot')
 plt.show()
 
+# Create a histogram
+plt.hist(residuals, bins=10, edgecolor='black')
+
+# Add labels and title
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.title('Histogram of Residuals')

@@ -88,4 +88,5 @@ print("t-statistic:", t_statistic)
 print("p-value:", p_value)
 
 #Loading heart data
-data = pd.read_excel(r"C:/Users/fordeia/DataAnalysisI/marketingData.xlsx")
+heart_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\heart_data.xlsx")
+heart_data[:6]

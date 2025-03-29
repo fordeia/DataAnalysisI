@@ -93,6 +93,8 @@ heart_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\heart_data.xlsx")
 print(heart_data[:6])
 
 #Multiple linearn regression 
+import statsmodels.api as sm
+import pandas as pd
 df = pd.DataFrame(heart_data)
 # Define the dependent and independent variables
 Y = df['heart.disease']

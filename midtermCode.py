@@ -47,7 +47,7 @@ print(f"count_women: {count_women}")
 import matplotlib.pyplot as plt
 
 # Create the boxplot
-plt.boxplot([Men_bodyfat, Women_bodyfat], labels=['Men bodyfat', 'Women bodyfat'])
+plt.boxplot([Men_bodyfat, Women_bodyfat], tick_labels=['Men bodyfat', 'Women bodyfat'])
 
 # Add title and labels
 plt.title('Side-by-Side Boxplot')

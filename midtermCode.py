@@ -133,3 +133,9 @@ plt.ylabel('Frequency')
 plt.title('Histogram of Residuals')
 plt.show()
 
+#Shapiro-Wilk test for normality of residuals
+statistic, p_value = shapiro(residuals)
+print("Shapiro-Wilk Statistic:", statistic)
+print("P-value:", p_value)
+
+

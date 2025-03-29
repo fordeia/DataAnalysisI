@@ -131,3 +131,5 @@ plt.hist(residuals, bins=10, edgecolor='black')
 plt.xlabel('Value')
 plt.ylabel('Frequency')
 plt.title('Histogram of Residuals')
+plt.show()
+

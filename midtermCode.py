@@ -89,4 +89,4 @@ print("p-value:", p_value)
 
 #Loading heart data
 heart_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\heart_data.xlsx")
-heart_data[:6]
+print(heart_data[:6])

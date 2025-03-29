@@ -86,3 +86,5 @@ t_statistic, p_value = stats.ttest_ind(Men_bodyfat, Women_bodyfat, equal_var=Tru
 # Print the results
 print("t-statistic:", t_statistic)
 print("p-value:", p_value)
+
+#Loading heart data

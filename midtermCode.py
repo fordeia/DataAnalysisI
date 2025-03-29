@@ -145,7 +145,7 @@ def calculate_vif(df1, features):
    
     vif_data = pd.DataFrame()
     vif_data["Feature"] = features
-    vif_data["VIF"] = [variance_inflation_factor(df[features].values, i)
+    vif_data["VIF"] = [variance_inflation_factor(df1[features].values, i)
                           for i in range(len(features))]
     return vif_data
 

@@ -138,4 +138,25 @@ statistic, p_value = shapiro(residuals)
 print("Shapiro-Wilk Statistic:", statistic)
 print("P-value:", p_value)
 
+#Use the variance inflated factor to test for multicollinearity. 
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+def calculate_vif(df, features):
+   
+    vif_data = pd.DataFrame()
+    vif_data["Feature"] = features
+    vif_data["VIF"] = [variance_inflation_factor(df[features].values, i)
+                          for i in range(len(features))]
+    return vif_data
+
+# Example usage:
+
+df = heart_data
+
+features_to_check = ['biking', 'smoking']
+vif_result = calculate_vif(df, features_to_check)
+print(vif_result)
+
+
+
 

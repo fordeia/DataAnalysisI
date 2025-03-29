@@ -45,7 +45,6 @@ print(f"count_women: {count_women}")
 
 #Creating a side-by-side boxplot
 import matplotlib.pyplot as plt
-import numpy as np
 
 # Create the boxplot
 plt.boxplot([Men_bodyfat, Women_bodyfat], labels=['Men bodyfat', 'Women bodyfat'])

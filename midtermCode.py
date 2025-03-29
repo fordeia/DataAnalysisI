@@ -141,7 +141,7 @@ print("P-value:", p_value)
 #Use the variance inflated factor to test for multicollinearity. 
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-def calculate_vif(df, features):
+def calculate_vif(df1, features):
    
     vif_data = pd.DataFrame()
     vif_data["Feature"] = features
@@ -151,10 +151,10 @@ def calculate_vif(df, features):
 
 # Example usage:
 
-df = heart_data
+df1 = heart_data
 
 features_to_check = ['biking', 'smoking']
-vif_result = calculate_vif(df, features_to_check)
+vif_result = calculate_vif(df1, features_to_check)
 print(vif_result)
 
 

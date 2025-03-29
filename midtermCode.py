@@ -79,3 +79,10 @@ df2 = len(y) - 1
 p_value = 1 - stats.f.cdf(f_stat, df1, df2)
 print("F-statistic:",f_stat)
 print("P-value:", p_value)
+
+#Two sample t-test
+t_statistic, p_value = stats.ttest_ind(Men_bodyfat, Women_bodyfat, equal_var=True)
+
+# Print the results
+print("t-statistic:", t_statistic)
+print("p-value:", p_value)

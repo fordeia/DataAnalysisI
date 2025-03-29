@@ -108,3 +108,19 @@ model = sm.OLS(Y, X).fit()
 
 # Print the model summary
 print(model.summary())
+
+#Use a residual plot to test the linearity and homoskedasticity (equal variance) assumptions.
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+
+# Calculate the residuals
+residuals = model.resid
+
+# Create the residual plot
+plt.scatter(results.fittedvalues, residuals)
+plt.axhline(y=0, color='r', linestyle='--')
+plt.xlabel('Fitted values')
+plt.ylabel('Residuals')
+plt.title('Residual Plot')
+plt.show()
+

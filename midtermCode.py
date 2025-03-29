@@ -26,7 +26,6 @@ Men_bodyfat = [13.3,6,20,8,14,19,18,25,16,24,15,1,15]
 Women_bodyfat = [22,16,21.7,21,30,12,23.2,28,23]
 
 #Count, mean and standard deviation
-
 import statistics
 #Men
 count_men = len(Men_bodyfat)
@@ -43,3 +42,17 @@ std_dev_sample_women = statistics.stdev(Women_bodyfat)
 print(f"Sample standard deviation_women: {std_dev_sample_women}")
 count_women = len(Women_bodyfat)
 print(f"count_women: {count_women}")
+
+#Creating a side-by-side boxplot
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create the boxplot
+plt.boxplot([Men_bodyfat, Women_bodyfat], labels=['Men bodyfat', 'Women bodyfat'])
+
+# Add title and labels
+plt.title('Side-by-Side Boxplot')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()

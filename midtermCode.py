@@ -77,5 +77,5 @@ f_stat = np.var(x, ddof=1) / np.var(y, ddof=1)
 df1 = len(x) - 1
 df2 = len(y) - 1
 p_value = 1 - stats.f.cdf(f_stat, df1, df2)
-print(f_stat)
-print(p-value)
+print("F-statistic:",f_stat)
+print("P-value:", p-value)

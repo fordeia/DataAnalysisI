@@ -117,7 +117,7 @@ import matplotlib.pyplot as plt
 residuals = model.resid
 
 # Create the residual plot
-plt.scatter(results.fittedvalues, residuals)
+plt.scatter(model.fittedvalues, residuals)
 plt.axhline(y=0, color='r', linestyle='--')
 plt.xlabel('Fitted values')
 plt.ylabel('Residuals')

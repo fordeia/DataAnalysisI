@@ -26,24 +26,20 @@ Men_bodyfat = [13.3,6,20,8,14,19,18,25,16,24,15,1,15]
 Women_bodyfat = [22,16,21.7,21,30,12,23.2,28,23]
 
 #Count, mean and standard deviation
-#Men 
-#length(Men_bodyfat) 
-#mean(Men_bodyfat) 
-#sd(Men_bodyfat) 
-#Women
-#length(Women_bodyfat) 
-#mean(Women_bodyfat) 
-#sd(Women_bodyfat) 
 
 import statistics
 #Men
+count_men = len(Men_bodyfat)
+print(f"count_men: {count_men}")
 mean_value_stats_men = statistics.mean(Men_bodyfat)
 print(f"mean_men: {mean_value_stats_men}")
-std_dev_sample = statistics.stdev(Men_bodyfat)
-print(f"Sample standard deviation: {std_dev_sample}")
+std_dev_sample_men = statistics.stdev(Men_bodyfat)
+print(f"Sample standard deviation: {std_dev_sample_men}")
 
 #Women
 mean_value_stats_women = statistics.mean(Women_bodyfat)
 print(f"mean_women: {mean_value_stats_women}")
-std_dev_sample = statistics.stdev(Women_bodyfat)
-print(f"Sample standard deviation: {std_dev_sample}")
+std_dev_sample_women = statistics.stdev(Women_bodyfat)
+print(f"Sample standard deviation_women: {std_dev_sample_women}")
+count_women = len(Women_bodyfat)
+print(f"count_women: {count_women}")

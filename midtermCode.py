@@ -55,3 +55,16 @@ plt.ylabel('Values')
 
 # Show the plot
 plt.show()
+
+# Shapiro-Wilk normality test for Men's body fat
+from scipy.stats import shapiro
+data = Men_bodyfat
+statistic, p_value = shapiro(data)
+print("Shapiro-Wilk Statistic:", statistic)
+print("P-value:", p_value)
+
+# Shapiro-Wilk normality test for Women's body fat
+data = Women_bodyfat
+statistic, p_value = shapiro(data)
+print("Shapiro-Wilk Statistic:", statistic)
+print("P-value:", p_value)

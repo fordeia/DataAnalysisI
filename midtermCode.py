@@ -91,3 +91,18 @@ print("p-value:", p_value)
 import pandas as pd
 heart_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\heart_data.xlsx")
 print(heart_data[:6])
+
+#Multiple linearn regression 
+df = pd.DataFrame(heart_data)
+# Define the dependent and independent variables
+Y = df['heart.disease']
+X = df[['biking', 'smoking']]
+
+# Add a constant to the independent variables (for the intercept)
+X = sm.add_constant(X)
+
+# Fit the multiple linear regression model
+model = sm.OLS(Y, X).fit()
+
+# Print the model summary
+print(model.summary())

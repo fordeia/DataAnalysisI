@@ -87,6 +87,14 @@ t_statistic, p_value = stats.ttest_ind(Men_bodyfat, Women_bodyfat, equal_var=Tru
 print("t-statistic:", t_statistic)
 print("p-value:", p_value)
 
+
+#Two sample Welch's t-test
+t_statistic, p_value = stats.ttest_ind(Men_bodyfat, Women_bodyfat, equal_var=False)
+
+# Print the results
+print("t-statistic:", t_statistic)
+print("p-value:", p_value)
+
 #Loading heart data
 import pandas as pd
 heart_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\heart_data.xlsx")

@@ -9,3 +9,6 @@ summary(one.way)
 #Table of fertilizer data
 table(CropData$fertilizer)
 
+#Tukey HSD test to see which groups as statistically significantly different. 
+TukeyHSD(one.way, conf.level=.95)
+

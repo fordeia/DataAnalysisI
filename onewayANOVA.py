@@ -6,9 +6,9 @@ print(crop_data)
 df = pd.DataFrame(crop_data[:10])
 
 # Perform one-way ANOVA
-f_statistic, p_value = stats.f_oneway(df['yield'][df['fertilizer'] == '1'],
-                                    df['yield'][df['fertilizer'] == '2'],
-                                    df['yield'][df['fertilizer'] == '3'])
+f_statistic, p_value = stats.f_oneway(df['yield'][df['fertilizer'] == 1],
+                                    df['yield'][df['fertilizer'] == 2],
+                                    df['yield'][df['fertilizer'] == 3])
 
 print("F-statistic:", f_statistic)
 print("P-value:", p_value)

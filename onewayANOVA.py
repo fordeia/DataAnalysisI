@@ -2,7 +2,7 @@ import scipy.stats as stats
 import pandas as pd
 #Uploading the data
 crop_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\crop_data.xltx")
-print(crop_data[:10])
+print(crop_data)
 df = pd.DataFrame(crop_data)
 
 # Perform one-way ANOVA

@@ -1,4 +1,5 @@
 import scipy.stats as stats
+import scikit_posthocs as sp
 import pandas as pd
 #Uploading the data
 crop_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\crop_data.xltx")

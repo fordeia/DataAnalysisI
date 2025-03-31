@@ -22,5 +22,5 @@ else:
     print("Fail to reject the null hypothesis: There is no significant difference between the group means.")
 
 # Tukey's HSD test
-    tukey_result = sp.posthoc_tukey(df, val_col='yield', group_col='fertilizer')
-    print("Tukey's HSD test:\n", tukey_result)
+tukey_result = sp.posthoc_tukey(df, val_col='yield', group_col='fertilizer')
+print("Tukey's HSD test:\n", tukey_result)

@@ -11,7 +11,7 @@ print(crop_data[:10])
 df = pd.DataFrame(crop_data)
 
 # Fit the ANOVA model with blocking
-model = ols(`yield ~ C(fertilizer) + C(block)`, data=df).fit()
+model = ols('yield ~ C(fertilizer) + C(block)', data=df).fit()
 
 # Perform the ANOVA test
 anova_table = sm.stats.anova_lm(model, typ=2)

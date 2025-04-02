@@ -2,6 +2,8 @@
 CropData <-read.table("cropData.txt",header =TRUE,sep="\t", fill = TRUE)
 head(CropData, 10)
 
+boxplot(CropData$yield ~ CropData$fertilizer)
+
 #Fitting the oneway model
 one.way <- aov(yield ~ factor(fertilizer), data = CropData)
 summary(one.way)

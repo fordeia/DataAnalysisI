@@ -5,7 +5,7 @@ head(CropData, 10)
 boxplot(CropData$yield ~ CropData$fertilizer)
 
 #Fitting the oneway model
-one.way <- aov(yield ~ factor(fertilizer), data = CropData)
+one.way <- aov(yield ~ blocking + factor(fertilizer), data = CropData)
 summary(one.way)
 
 #Table of fertilizer data

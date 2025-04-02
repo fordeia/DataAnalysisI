@@ -6,6 +6,11 @@ crop_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\crop_data.xltx")
 print(crop_data[:10])
 df = pd.DataFrame(crop_data)
 
+df.boxplot(column='yield', by='fertilizer')
+plt.title('Side-by-side Boxplots')
+plt.suptitle('')  # Suppress the default title
+plt.show()
+
 # Perform one-way ANOVA
 f_statistic, p_value = stats.f_oneway(df['yield'][df['fertilizer'] == 1],
                                     df['yield'][df['fertilizer'] == 2],

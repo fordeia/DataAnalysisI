@@ -19,11 +19,3 @@ anova_table = sm.stats.anova_lm(model, typ=2)
 # Print the ANOVA table
 print(anova_table)
 
-df.boxplot(column='yield', by='fertilizer')
-plt.title('Side-by-side Boxplots')
-plt.suptitle('')  # Suppress the default title
-plt.show()
-
-# Tukey's HSD test
-tukey_result = sp.posthoc_tukey(df, val_col='yield', group_col='fertilizer')
-print("Tukey's HSD test:\n", tukey_result)

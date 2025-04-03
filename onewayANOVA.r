@@ -20,3 +20,13 @@ one.wayBlocking <- aov(yield ~ block + factor(fertilizer), data = CropData)
 summary(one.wayBlocking)
 
 
+# Perform the two-way ANOVA
+fit <- aov(yield ~ factor(fertilizer)*factor(density), data = CropData)
+
+# Summarize the ANOVA results
+summary(fit)
+
+# Example of post-hoc test (Tukey's HSD)
+if (anova(fit)[[1]][["Pr(>F)"]][3] < 0.05) {
+  TukeyHSD(fit)
+}

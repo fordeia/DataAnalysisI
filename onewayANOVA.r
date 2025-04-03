@@ -27,6 +27,6 @@ fit <- aov(yield ~ factor(fertilizer)*factor(density), data = CropData)
 summary(fit)
 
 # Example of post-hoc test (Tukey's HSD)
-if (anova(fit)[[1]][["Pr(>F)"]][3] < 0.05) {
+if (anova(fit)[[1]][["Pr(>F)"]][2] < 0.05) {
   TukeyHSD(fit)
 }

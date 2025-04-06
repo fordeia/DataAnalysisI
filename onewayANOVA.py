@@ -8,7 +8,7 @@ from statsmodels.formula.api import ols
 #Uploading the data
 crop_data = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\crop_data.xltx")
 print(crop_data[:10])
-df = pd.DataFrame(crop_data)
+df = pd.DataFrame({crop_data})
 
 # Fit the ANOVA model with blocking
 model = smf.ols('yield ~ C(fertilizer) + C(block)', data=df).fit()

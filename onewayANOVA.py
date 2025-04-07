@@ -14,7 +14,7 @@ df = pd.DataFrame(crop_data)
 model = sm.OLS('yield ~ C(fertilizer) + C(block)', data=df).fit()
 
 # Perform the ANOVA test
-#anova_table = sm.stats.anova_lm(model, typ=2)
+#anova_table = sm.stats.anova_lm(model, typ=
 
 # Print the ANOVA table
 #print(anova_table)

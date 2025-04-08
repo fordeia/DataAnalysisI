@@ -1,3 +1,6 @@
+#loading the package
+library("ggpubr")
+
 #Importing data
 PlantGrowth<-PlantGrowth
 head(PlantGrowth)
@@ -21,3 +24,9 @@ group_by(PlantGrowth, group) %>%
     IQR = IQR(weight, na.rm = TRUE)
   )
 
+#Visualizing the data
+#Boxplots
+ggboxplot(my_data, x = "group", y = "weight",
+          color = "group", palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+          order = c("ctrl", "trt1", "trt2"),
+          ylab = "Weight", xlab = "Treatment")

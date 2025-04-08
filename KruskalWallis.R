@@ -37,3 +37,7 @@ ggline(PlantGrowth, x = "group", y = "weight",
        add = c("mean_se", "jitter"),
        order = c("ctrl", "trt1", "trt2"),
        ylab = "Weight", xlab = "Treatment")
+
+#Kruskal-Wallis Test to compare means
+kruskal.test(weight ~ group, data = PlantGrowth)
+

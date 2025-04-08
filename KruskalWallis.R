@@ -1,5 +1,5 @@
 #Installing the packages
-install.packages("ggpubr")
+#install.packages("ggpubr")
 library("ggpubr")
 
 #Importing data
@@ -27,7 +27,7 @@ group_by(PlantGrowth, group) %>%
 
 #Visualizing the data
 #Boxplots
-ggboxplot(my_data, x = "group", y = "weight",
+ggboxplot(PlantGrowth, x = "group", y = "weight",
           color = "group", palette = c("#00AFBB", "#E7B800", "#FC4E07"),
           order = c("ctrl", "trt1", "trt2"),
           ylab = "Weight", xlab = "Treatment")

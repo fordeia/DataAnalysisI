@@ -1,4 +1,5 @@
-#loading the package
+#Installing the packages
+install.packages("ggpubr")
 library("ggpubr")
 
 #Importing data

@@ -41,3 +41,7 @@ ggline(PlantGrowth, x = "group", y = "weight",
 #Kruskal-Wallis Test to compare means
 kruskal.test(weight ~ group, data = PlantGrowth)
 
+#Pairwise comparison
+pairwise.wilcox.test(PlantGrowth$weight, PlantGrowth$group,
+                 p.adjust.method = "BH")
+

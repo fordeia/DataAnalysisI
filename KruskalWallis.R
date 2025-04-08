@@ -31,3 +31,9 @@ ggboxplot(PlantGrowth, x = "group", y = "weight",
           color = "group", palette = c("#00AFBB", "#E7B800", "#FC4E07"),
           order = c("ctrl", "trt1", "trt2"),
           ylab = "Weight", xlab = "Treatment")
+
+#Add error bars
+ggline(PlantGrowth, x = "group", y = "weight",
+       add = c("mean_se", "jitter"),
+       order = c("ctrl", "trt1", "trt2"),
+       ylab = "Weight", xlab = "Treatment")

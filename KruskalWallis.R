@@ -12,7 +12,7 @@ PlantGrowth$group <- ordered(PlantGrowth$group,levels = c("ctrl", "trt1", "trt2"
 library(dplyr)
 
 #Computing the summary statistics
-group_by(data, group) %>%
+group_by(PlantGrowth, group) %>%
   summarise(
     count = n(),
     mean = mean(weight, na.rm = TRUE),

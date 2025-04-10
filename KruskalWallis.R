@@ -1,9 +1,12 @@
 #Installing the packages
 #install.packages("ggpubr")
 library("ggpubr")
+library(openxlsx)
 
 #Importing data
 PlantGrowth<-PlantGrowth
+
+write.xlsx(PlantGrowth, 'C:/Users/fordeia/DataAnalysisI/PlantGrowth.xlsx')
 head(PlantGrowth)
 
 #Displaying group levels

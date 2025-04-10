@@ -1,6 +1,8 @@
 options(scipen = 999)
 #Obtaining Data
-CropData <-read.table("cropData.txt",header =TRUE,sep="\t", fill = TRUE)
+#CropData <-read.table("cropData.txt",header =TRUE,sep="\t", fill = TRUE)
+library(readxl)
+CropData <- read_excel("CropData.xlsx")
 head(CropData, 10)
 
 boxplot(CropData$yield ~ CropData$fertilizer)

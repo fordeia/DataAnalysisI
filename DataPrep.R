@@ -14,4 +14,4 @@ Data_to_clean %>% count(Status)
 Data_to_clean %>%
   filter(Age < 900)
 
-Data_to_clean %>% count(Age)
+

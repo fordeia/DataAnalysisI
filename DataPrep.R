@@ -14,6 +14,10 @@ Data_to_clean %>% count(Status)
 Data_to_clean %>%
   na.omit()
 
+#Remove rows with NA in specific colums
+Data_to_clean %>%
+  filter(!is.na(Gender))
+
 #Removing rows with impossible age values
 Data_to_clean %>%
   filter(Age < 900)

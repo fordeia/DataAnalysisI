@@ -30,7 +30,7 @@ Data_to_clean %>%
   distinct()
 
 #Renaming levels
-Data_to_clean$Gender <- fct_recode(Data_to_clean$Gender, "female" = c("Female", "femail"))
+Data_to_clean$Gender <- fct_recode(Data_to_clean$Gender, "female" = "Female", "female" ="femail")
 
 # View the result
 print(Data_to_clean)

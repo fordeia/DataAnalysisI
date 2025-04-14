@@ -22,6 +22,10 @@ Data_to_clean %>%
 Data_to_clean %>%
   filter(Age < 900)
 
+#Removing duplicates
+Data_to_clean %>%
+  distinct()
+
 DataCleaned<-(Data_to_clean %>%
   filter(Age < 900))
 

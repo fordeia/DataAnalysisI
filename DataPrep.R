@@ -3,6 +3,7 @@ library(tidyverse)
 library(readxl)
 
 Data_to_clean<- read_excel("Data_Cleaning.xlsx")
+head(Data_to_clean)
 
 Summarizing the variables with count
 Data_to_clean %>% count(Gender)

@@ -12,6 +12,6 @@ Data_to_clean %>% count(Status)
 
 #Removing rows with impossible age values
 Data_to_clean %>%
-  filter(Age > 900)
+  filter(Age < 900)
 
 Data_to_clean %>% count(Age)

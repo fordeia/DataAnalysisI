@@ -9,3 +9,9 @@ Summarizing the variables with count
 Data_to_clean %>% count(Gender)
 Data_to_clean %>% count(Age)
 Data_to_clean %>% count(Status)
+
+#Removing rows with impossible age values
+Data_to_clean %>%
+  filter(Age > 900)
+
+Data_to_clean %>% count(Age)

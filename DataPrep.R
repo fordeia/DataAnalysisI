@@ -16,7 +16,7 @@ Data_to_clean %>%
 
 #Remove rows with NA in specific colums
 Data_to_clean %>%
-  filter(!is.na(Gender))
+  filter(!is.na(Status))
 
 #Removing rows with impossible age values
 Data_to_clean %>%

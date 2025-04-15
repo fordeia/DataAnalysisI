@@ -36,6 +36,8 @@ Data_to_clean$Gender <- fct_recode(Data_to_clean$Gender, "female" = "Female", "f
 print(Data_to_clean)
 
 ######workflow######
+#Reloading data
+Data_to_clean<- read_excel("Data_Cleaning.xlsx")
 
 DataCleaned<-(Data_to_clean %>%
                 filter(Age < 900))
@@ -49,6 +51,5 @@ DataCleaned<-(DataCleaned %>%
 
 #Renaming levels
 DataCleaned$Gender <- fct_recode(DataCleaned$Gender, "female" = "Female", "female" ="femail")
-
 
 DataCleaned

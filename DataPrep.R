@@ -62,6 +62,13 @@ print(DataCleaned)
 ggplot(DataCleaned, aes(x=Log_Age, y=Height_cm)) + 
     geom_point() + ggtitle("Scatter plot Log Age vs Height")
 
+# Fitting Simple Linear Regression 
+lm.r= lm(formula = Height ~ Log_Age,
+         data = DataCleaned)
+#Summary of the model
+summary(lm.r)
+
+
 
 
 

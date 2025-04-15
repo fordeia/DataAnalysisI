@@ -43,7 +43,7 @@ Data_to_clean<- read_excel("Data_Cleaning.xlsx")
 DataCleaned<-(Data_to_clean %>%
   filter(!is.na(Status)))
 
-DataCleaned<-(Data_to_clean %>%
+DataCleaned<-(DataCleaned %>%
                 filter(Age < 900))
 
 DataCleaned<-(DataCleaned %>%

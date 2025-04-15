@@ -49,7 +49,7 @@ DataCleaned<-(DataCleaned %>%
 #Renaming levels
 DataCleaned$Gender <- fct_recode(DataCleaned$Gender, "female" = "Female", "female" ="femail")
 
-DataClean<-na_if(DataClean$Age, 999)
+DataCleaned$Age<-na_if(DataCleaned$Age, 999)
 
 DataCleaned
 

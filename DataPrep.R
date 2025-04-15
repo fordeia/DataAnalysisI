@@ -44,7 +44,7 @@ DataCleaned<-(Data_to_clean %>%
   filter(!is.na(Status)))
 
 DataCleaned<-(DataCleaned %>%
-                filter(Age < 900))
+                filter(Age !=999))
 
 DataCleaned<-(DataCleaned %>%
   distinct())

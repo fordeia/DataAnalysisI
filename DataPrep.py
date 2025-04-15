@@ -15,4 +15,7 @@ df_cleaned = df.dropna()
 # Remove duplicate rows based on all columns
 df_cleaned = df_cleaned.drop_duplicates()
 
+# Rename levels in 'col1'
+df_cleaned['Gender'] = df_cleaned['Gender'].replace({'Female': 'female', 'femail': 'female'})
+
 print(df_cleaned)

@@ -38,4 +38,9 @@ DataCleaned
         DataCleaned <- DataCleaned %>%
           mutate(Age = replace_na(Age, median(Age, na.rm = TRUE)))
 
+#Boxplot
+
+p <- ggplot(DataCleaned, aes(Gender, Age))
+p + geom_boxplot()
+
 DataCleaned

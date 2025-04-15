@@ -39,12 +39,12 @@ print(Data_to_clean)
 #Reloading data
 Data_to_clean<- read_excel("Data_Cleaning.xlsx")
 
-#Remove rows with NA in specific colums
-DataCleaned<-(Data_to_clean %>%
-  filter(!is.na(Status)))
-
 DataCleaned<-(DataCleaned %>%
                 filter(Age !=999))
+
+#Remove rows with NA in specific colums
+DataCleaned<-(DataCleaned %>%
+  filter(!is.na(Status)))
 
 DataCleaned<-(DataCleaned %>%
   distinct())

@@ -57,6 +57,11 @@ ggplot(DataCleaned, aes(x=Age, y=Height_cm)) +
 DataCleaned$Log_Age<-log(DataCleaned$Age)
 print(DataCleaned)
 
+#Scatter plot log age versus height
+# basic scatterplot
+ggplot(DataCleaned, aes(x=Log_Age, y=Height_cm)) + 
+    geom_point() + ggtitle("Scatter plot Log Age vs Height")
+
 
 
 

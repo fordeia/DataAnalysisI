@@ -54,10 +54,10 @@ DataCleaned$Age<-na_if(DataCleaned$Age, 999)
 DataCleaned
 
   # Impute with the mean
-        DataCleaned <- DataCleaned %>%
-          round(mutate(Age = replace_na(Age, mean(Age, na.rm = TRUE))))
+        DataCleaned <- DataCleaned %>% round() %>%
+          mutate(Age = replace_na(Age, mean(Age, na.rm = TRUE)))
         # Or, impute with the median
         DataCleaned <- DataCleaned %>%
-          round(mutate(Age = replace_na(Age, median(Age, na.rm = TRUE))))
+          mutate(Age = replace_na(Age, median(Age, na.rm = TRUE)))
 
 DataCleaned

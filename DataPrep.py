@@ -7,5 +7,5 @@ df = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\Data_Cleaning.xlsx")
 print(df)
 
 # Delete rows with impossible ages
-#df.drop(df[df['Age'] == 999].index, inplace=True)
-#print(df)
+df.drop(df[df['Age'] == 999].index, inplace=True)
+print(df)

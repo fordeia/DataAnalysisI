@@ -41,7 +41,7 @@ DataCleaned<-(Data_to_clean %>%
                 filter(Age < 900))
 
 #Remove rows with NA in specific colums
-DataCleaned<-(Data_to_clean %>%
+DataCleaned<-(DataCleaned %>%
   filter(!is.na(Status)))
 
 DataCleaned<-(DataCleaned %>%

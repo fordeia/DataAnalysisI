@@ -13,6 +13,6 @@ df.drop(df[df['Age'] == 999].index, inplace=True)
 df_cleaned = df.dropna()
 
 # Remove duplicate rows based on all columns
-df_cleaned = df.drop_duplicates()
+df_cleaned = df_cleaned.drop_duplicates()
 
 print(df_cleaned)

@@ -44,6 +44,10 @@ print(DataCleaned)
 p <- ggplot(DataCleaned, aes(Gender, Age))
 p + geom_boxplot()
 
+#Adding a height variable
+DataCleaned$Height_cm <- c(160, 175, 155, 165, 178, 190, 191, 180, 159, 167, 167) 
+print(DataCleaned)
+
 #Log transformation of data
 DataCleaned$Log_Age<-log(DataCleaned$Age)
 print(DataCleaned)

@@ -35,7 +35,19 @@ Data_to_clean$Gender <- fct_recode(Data_to_clean$Gender, "female" = "Female", "f
 # View the result
 print(Data_to_clean)
 
+######workflow######
+
 DataCleaned<-(Data_to_clean %>%
-  filter(Age < 900))
+                filter(Age < 900))
+
+DataCleaned<-(DataCleaned %>%
+  na.omit())
+
+DataCleaned<-(DataCleaned %>%
+  distinct())
+
+#Renaming levels
+DataCleaned$Gender <- fct_recode(DataCleaned$Gender, "female" = "Female", "female" ="femail")
+
 
 DataCleaned

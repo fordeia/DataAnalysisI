@@ -10,9 +10,9 @@ df = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\Data_Cleaning.xlsx")
 df.drop(df[df['Age'] == 999].index, inplace=True)
 
 #Droppin NA
-df = df.dropna()
+df_cleaned = df.dropna()
 
 # Remove duplicate rows based on all columns
-df = df.drop_duplicates()
+df_cleaned = df_cleaned.drop_duplicates()
 
-print(df)
+print(df_cleaned)

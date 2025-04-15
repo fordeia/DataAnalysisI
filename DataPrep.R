@@ -44,4 +44,8 @@ print(DataCleaned)
 p <- ggplot(DataCleaned, aes(Gender, Age))
 p + geom_boxplot()
 
+#Log transformation of data
+DataCleaned$log(Age)<-DataCleaned$log(Age)
+
+
 

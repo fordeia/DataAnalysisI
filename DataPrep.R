@@ -57,8 +57,5 @@ DataCleaned
         # Or, impute with the median
         DataCleaned <- DataCleaned %>%
           mutate(Age = replace_na(Age, median(Age, na.rm = TRUE)))
-        # Or, fill with the previous Age
-        DataCleaned <-DataCleaned  %>%
-          mutate(Age = fill(Age))
 
 DataCleaned

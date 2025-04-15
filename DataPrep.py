@@ -11,4 +11,4 @@ df.drop(df[df['Age'] == 999].index, inplace=True)
 
 #Droppin NA
 df_cleaned = df.dropna()
-   # print(df_cleaned)
+print(df_cleaned)

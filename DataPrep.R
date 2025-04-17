@@ -71,12 +71,44 @@ summary(lm.r)
 #Creating a bootstrap sample from the cleaned data
 bootDataCleaned=DataCleaned[sample(nrow(DataCleaned), 1000, replace=TRUE), ]
 
-#Machine Learning
+#Machine Learning (Assume all assumptions are met)
 #Splitting the data 70:30 
 set.seed(25)
 samp <- sample(nrow(bootDataCleaned), 0.7 * nrow(bootDataCleaned))
 train <- bootDataCleaned[samp, ]
 test <- bootDataCleaned[-samp, ]
+
+#Training the model
+# Fit the model and obtain summary
+model <- lm(Height_cm ~ Age, data = train)
+summary(model)
+
+# Make predictions on the test set
+predictions <- predict(model, test)
+
+# Put height and prediction in a dataframe
+eval <- cbind(test$Height_cm, predictions)
+colnames(eval) <- c("Y", "Yhat")
+eval <- as.data.frame(eval)
+head(eval)
+
+# Evaluate model performance with root mean square error
+mse <- mean((eval$Y - eval$Yhat)^2)
+rmse <- sqrt(mse)
+
+#Evaluated model performance with observed vs predictive plots
+
+
+ggplot(test, aes(x = Height_cm, y = predictions )) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1, color = "red") +
+  xlab("Observed Values") +
+  ylab("Predicted Values") +
+  ggtitle("Observed vs. Predicted Values")
+
+
+
+
 
 
 

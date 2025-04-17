@@ -71,6 +71,14 @@ summary(lm.r)
 #Creating a bootstrap sample from the cleaned data
 bootDataCleaned=DataCleaned[sample(nrow(DataCleaned), 1000, replace=TRUE), ]
 
+#Machine Learning
+#Splitting the data 70:30 
+set.seed(25)
+samp <- sample(nrow(bootDataCleaned), 0.7 * nrow(bootDataCleaned))
+train <- bootDataCleaned[samp, ]
+test <- bootDataCleaned[-samp, ]
+
+
 
 
 

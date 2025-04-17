@@ -105,7 +105,7 @@ rmse
 #Evaluated model performance with observed vs predictive plots
 
 
-ggplot(test, aes(x = Height_cm, y = predictions )) +
+ggplot(test, aes(x = Salary, y = predictions )) +
   geom_point() +
   geom_abline(intercept = 0, slope = 1, color = "red") +
   xlab("Observed Values") +

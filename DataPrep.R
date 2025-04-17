@@ -107,7 +107,8 @@ ggplot(test, aes(x = Height_cm, y = predictions )) +
   ylab("Predicted Values") +
   ggtitle("Observed vs. Predicted Values")
 
-
+#Evaluating model performance with R-squared. 
+str(summary(model))
 
 
 

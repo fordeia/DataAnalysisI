@@ -68,6 +68,9 @@ lm.r= lm(formula = Height_cm ~ Log_Age,
 #Summary of the model
 summary(lm.r)
 
+#Creating a bootstrap sample from the cleaned data
+bootDataCleaned=DataCleaned[sample(nrow(DataCleaned), 1000, replace=TRUE), ]
+
 
 
 

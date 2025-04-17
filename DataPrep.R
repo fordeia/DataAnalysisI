@@ -49,6 +49,7 @@ p + geom_boxplot() + ggtitle("Comparative Boxplot Gender vs Age")
 DataCleaned$Height_cm <- c(160, 175, 155, 165, 178, 190, 191, 180, 159, 167, 167) 
 print(DataCleaned)
 
+
 # basic scatterplot
 ggplot(DataCleaned, aes(x=Age, y=Height_cm)) + 
     geom_point() + ggtitle("Scatter plot Age vs Height")
@@ -68,6 +69,10 @@ lm.r= lm(formula = Height_cm ~ Log_Age,
 #Summary of the model
 summary(lm.r)
 
+#Adding a salary variable
+DataCleaned$Salary_$ <- c(35,22, 55, 25, 23, 20,40, 45, 25, 19, 41) 
+print(DataCleaned)
+
 #Creating a bootstrap sample from the cleaned data
 bootDataCleaned=DataCleaned[sample(nrow(DataCleaned), 1000, replace=TRUE), ]
 
@@ -80,14 +85,14 @@ test <- bootDataCleaned[-samp, ]
 
 #Training the model
 # Fit the model and obtain summary
-model <- lm(Height_cm ~ Age, data = train)
+model <- lm(Salary_$ ~ Age, data = train)
 summary(model)
 
 # Make predictions on the test set
 predictions <- predict(model, test)
 
 # Put height and prediction in a dataframe
-eval <- cbind(test$Height_cm, predictions)
+eval <- cbind(test$Salary_$, predictions)
 colnames(eval) <- c("Y", "Yhat")
 eval <- as.data.frame(eval)
 head(eval)

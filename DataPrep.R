@@ -70,7 +70,7 @@ lm.r= lm(formula = Height_cm ~ Log_Age,
 summary(lm.r)
 
 #Adding a salary variable
-DataCleaned$Salary_$ <- c(35,22, 55, 25, 23, 20,40, 45, 25, 19, 41) 
+DataCleaned$Salary<- c(35,22, 55, 25, 23, 20,40, 45, 25, 19, 41) 
 print(DataCleaned)
 
 #Creating a bootstrap sample from the cleaned data
@@ -85,14 +85,14 @@ test <- bootDataCleaned[-samp, ]
 
 #Training the model
 # Fit the model and obtain summary
-model <- lm(Salary_$ ~ Age, data = train)
+model <- lm(Salary ~ Age, data = train)
 summary(model)
 
 # Make predictions on the test set
 predictions <- predict(model, test)
 
 # Put height and prediction in a dataframe
-eval <- cbind(test$Salary_$, predictions)
+eval <- cbind(test$Salary, predictions)
 colnames(eval) <- c("Y", "Yhat")
 eval <- as.data.frame(eval)
 head(eval)

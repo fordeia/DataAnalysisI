@@ -95,6 +95,7 @@ head(eval)
 # Evaluate model performance with root mean square error
 mse <- mean((eval$Y - eval$Yhat)^2)
 rmse <- sqrt(mse)
+rmse
 
 #Evaluated model performance with observed vs predictive plots
 

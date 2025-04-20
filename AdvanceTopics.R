@@ -22,3 +22,11 @@ plot.ts(kingstimeseriesSMA3)
 kingstimeseriesSMA8 <- SMA(kingstimeseries,n=8)
 plot.ts(kingstimeseriesSMA8)
 
+#To estimate the trend, seasonal and irregular components of this time series, we type:
+birthstimeseriescomponents <- decompose(birthstimeseries)
+
+#Outputing the individual components
+birthstimeseriescomponents$seasonal
+birthstimeseriescomponents$trend
+birthstimeseriescomponents$random
+

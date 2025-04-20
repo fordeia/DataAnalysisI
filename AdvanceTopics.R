@@ -30,3 +30,7 @@ birthstimeseriescomponents$seasonal
 birthstimeseriescomponents$trend
 birthstimeseriescomponents$random
 
+#Plotting the components
+plot(birthstimeseriescomponents)
+
+

@@ -13,6 +13,7 @@ plot.ts(kingstimeseries)
 #Smoothing the kings data, it is non-seasonal and the fluctuation are roughly the same size hence could be described by a additive model
 
 #Smoothing using a moving average of 3
+install.packages("TTR")
 library("TTR")
 kingstimeseriesSMA3 <- SMA(kingstimeseries,n=3)
 plot.ts(kingstimeseriesSMA3)

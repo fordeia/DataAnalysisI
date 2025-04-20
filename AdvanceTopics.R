@@ -1,2 +1,3 @@
 births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
-Read 168 items
+birthstimeseries <- ts(births, frequency=12, start=c(1946,1))
+birthstimeseries

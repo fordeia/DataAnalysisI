@@ -17,3 +17,8 @@ install.packages("TTR")
 library("TTR")
 kingstimeseriesSMA3 <- SMA(kingstimeseries,n=3)
 plot.ts(kingstimeseriesSMA3)
+
+#Smoothing order 8
+kingstimeseriesSMA8 <- SMA(kingstimeseries,n=8)
+plot.ts(kingstimeseriesSMA8)
+

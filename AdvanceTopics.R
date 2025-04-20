@@ -4,3 +4,8 @@ birthstimeseries
 
 #Plotting the timeseries
 plot.ts(birthstimeseries)
+
+#The kings time series
+kings <- scan("http://robjhyndman.com/tsdldata/misc/kings.dat",skip=3)
+kingstimeseries <- ts(kings)
+plot.ts(kingstimeseries)

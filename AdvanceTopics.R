@@ -33,4 +33,10 @@ birthstimeseriescomponents$random
 #Plotting the components
 plot(birthstimeseriescomponents)
 
+#Seasonal adjustment
+birthstimeseriescomponents <- decompose(birthstimeseries)
+birthstimeseriesseasonallyadjusted <- birthstimeseries - birthstimeseriescomponents$seasonal
+
+#Ploting the adjusted time series
+plot(birthstimeseriesseasonallyadjusted)
 

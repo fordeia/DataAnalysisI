@@ -70,7 +70,7 @@ rainseriesforecasts2 <- forecast(rainseriesforecasts, h=8)
 rainseriesforecasts2
 
 #Plotting prediction for the forecast
-plot.forecast(rainseriesforecasts2)
+plot(rainseriesforecasts2)
 
 
 

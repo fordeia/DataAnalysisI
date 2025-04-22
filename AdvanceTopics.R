@@ -72,5 +72,8 @@ rainseriesforecasts2
 #Plotting prediction for the forecast
 plot(rainseriesforecasts2)
 
+#Correlogram to test for auto-correlation
+acf(rainseriesforecasts2$residuals, lag.max=20)
+
 
 

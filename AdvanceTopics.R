@@ -2,6 +2,11 @@ births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
 birthstimeseries <- ts(births, frequency=12, start=c(1946,1))
 birthstimeseries
 
+#Writing to an excel file. 
+library(openxlsx)
+write.xlsx(birthstimeseries, "C:\Users\fordeia\DataAnalysisI\birthstimeseries.xltx")
+
+
 #Plotting the timeseries
 plot.ts(birthstimeseries)
 

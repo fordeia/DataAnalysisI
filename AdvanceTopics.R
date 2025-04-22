@@ -56,3 +56,6 @@ rainseriesforecasts$fitted
 #Plot
 plot(rainseriesforecasts)
 
+#Sum of square error to estimate accuracy of the forecast. 
+rainseriesforecasts$SSE
+

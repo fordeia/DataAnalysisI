@@ -75,5 +75,9 @@ plot(rainseriesforecasts2)
 #Correlogram to test for auto-correlation
 acf(rainseriesforecasts2$residuals, lag.max=20)
 
+#Box test to test for auto-correlation
+Box.test(rainseriesforecasts2$residuals, lag=20, type="Ljung-Box")
+
+
 
 

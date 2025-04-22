@@ -44,6 +44,8 @@ plot(birthstimeseriesseasonallyadjusted)
 rain <- scan("http://robjhyndman.com/tsdldata/hurst/precip1.dat",skip=1)
 #Read 100 items
 rainseries <- ts(rain,start=c(1813))
+rainseries
+#plot
 plot.ts(rainseries)
 
 #Simple Exponential Smoothing

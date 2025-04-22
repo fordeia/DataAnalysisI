@@ -4,7 +4,7 @@ birthstimeseries
 
 #Writing to an excel file. 
 library(openxlsx)
-write.xlsx(birthstimeseries, "C:\Users\fordeia\DataAnalysisI\birthstimeseries.xltx")
+write.xlsx(birthstimeseries, "C:\Users\fordeia\DataAnalysisI\birthstimeseries.xlsx")
 
 
 #Plotting the timeseries

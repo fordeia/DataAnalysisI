@@ -63,6 +63,7 @@ rainseriesforecasts$SSE
 HoltWinters(rainseries, beta=FALSE, gamma=FALSE, l.start=23.56)
 
 #Forcasting for time periods outside of the time series
+install.packages("forecast")
 library("forecast")
 
 rainseriesforecasts2 <- forecast.HoltWinters(rainseriesforecasts, h=8)

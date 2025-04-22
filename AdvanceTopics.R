@@ -68,4 +68,8 @@ library("forecast")
 rainseriesforecasts2 <- forecast.HoltWinters(rainseriesforecasts, h=8)
 rainseriesforecasts2
 
+#Plotting prediction for the forecast
+plot.forecast(rainseriesforecasts2)
+
+
 

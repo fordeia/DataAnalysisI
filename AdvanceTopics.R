@@ -66,7 +66,7 @@ HoltWinters(rainseries, beta=FALSE, gamma=FALSE, l.start=23.56)
 install.packages("forecast")
 library("forecast")
 
-rainseriesforecasts2 <- forecast.HoltWinters(rainseriesforecasts, h=8)
+rainseriesforecasts2 <- forecast(rainseriesforecasts, h=8)
 rainseriesforecasts2
 
 #Plotting prediction for the forecast

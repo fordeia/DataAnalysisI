@@ -62,4 +62,10 @@ rainseriesforecasts$SSE
 #Simple Exponential Smoothing using the initial value of the time series
 HoltWinters(rainseries, beta=FALSE, gamma=FALSE, l.start=23.56)
 
+#Forcasting for time periods outside of the time series
+library("forecast")
+
+rainseriesforecasts2 <- forecast.HoltWinters(rainseriesforecasts, h=8)
+rainseriesforecasts2
+
 

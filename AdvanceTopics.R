@@ -50,3 +50,9 @@ plot.ts(rainseries)
 rainseriesforecasts <- HoltWinters(rainseries, beta=FALSE, gamma=FALSE)
 rainseriesforecasts
 
+#The forcasted time series
+rainseriesforecasts$fitted
+
+#Plot
+plot(rainseriesforecasts)
+

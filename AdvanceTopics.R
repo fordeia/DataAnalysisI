@@ -59,3 +59,7 @@ plot(rainseriesforecasts)
 #Sum of square error to estimate accuracy of the forecast. 
 rainseriesforecasts$SSE
 
+#Simple Exponential Smoothing using the initial value of the time series
+HoltWinters(rainseries, beta=FALSE, gamma=FALSE, l.start=23.56)
+
+

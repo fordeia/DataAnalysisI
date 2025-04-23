@@ -1,4 +1,4 @@
-#Loading packages
+-#Loading packages
 library(tidyverse)
 library(readxl)
 library(forcats)
@@ -112,7 +112,7 @@ for (i in 1:nrow(boot_results)) {
     }
 }
 
-Actual<-as.matrix(0,nrow(boot_results),nrow(DataCleaned))
+Actual<-matrix(0,nrow(boot_results),nrow(DataCleaned))
 
 
 for (i in 1:nrow(boot_results)) {

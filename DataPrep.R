@@ -100,19 +100,11 @@ for (i in 1:boot_samples) {
 # view the first sample
 head(boot_data[[1]])
 
-#Evaluated model performance with observed vs predictive plots
+#Evaluating the model
 
+OrigDataSel<-CBloom4_24[,-c(1,3,4)]
 
-ggplot(test, aes(x = Salary, y = predictions )) +
-  geom_point() +
-  geom_abline(intercept = 0, slope = 1, color = "red") +
-  xlab("Observed Values") +
-  ylab("Predicted Values") +
-  ggtitle("Observed vs. Predicted Values")
-
-#Evaluating model performance with R-squared. 
-str(summary(model))
-
+Pred<-matrix(0,nrow(boot_results),nrow(OrigDataSel))
 
 
 

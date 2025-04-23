@@ -79,12 +79,11 @@ bootDataCleaned=DataCleaned[sample(nrow(DataCleaned), 1000, replace=TRUE), ]
 #Machine Learning (Assume all assumptions are met)######################################################################
 # Bootstrapping
 boot_samples <- 1000  # Number of bootstrap samples
-boot_results <- matrix(0, nrow = boot_samples, nrow(DataCleaned))
+boot_results <- matrix(0, nrow = boot_samples, ncol = nrow(DataCleaned))
 
 # Fit MLR models to bootstrap samples
 # create an empty list to store the samples
 boot_data <- list()
-RMSE <- list()
 
 for (i in 1:boot_samples) {
   # Bootstrap sample

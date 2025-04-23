@@ -1,32 +1,45 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.tsa.seasonal import seasonal_decompose
 import numpy as np
 
-# Read the excel file
-df = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\Data_Cleaning.xlsx")
+# Generate a synthetic time series
+np.random.seed(42)
+dates = pd.date_range(start='2023-01-01', end='2024-01-01', freq='MS')
+values = np.random.randn(len(dates)) + np.arange(len(dates))
+time_series_data = pd.DataFrame({'Date': dates, 'Value': values})
+time_series_data.set_index('Date', inplace=True)
 
-df_cleaned = df
+# Visualize the time series
+plt.figure(figsize=(10, 6))
+plt.plot(time_series_data['Value'], label='Time Series Data')
+plt.title('Time Series Plot')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.legend()
+plt.show()
 
-# Rename levels in 'col1'
-df_cleaned['Gender'] = df_cleaned['Gender'].replace({'Female': 'female', 'femail': 'female'})
+# Perform seasonal decomposition
+decomposition = seasonal_decompose(time_series_data['Value'], model='additive', period=3)
 
-# Remove duplicate rows based on all columns
-df_cleaned = df_cleaned.drop_duplicates()
+# Plot the decomposed components
+plt.figure(figsize=(10, 8))
 
-df_cleaned = df_cleaned.replace(999, np.nan)
+plt.subplot(4, 1, 1)
+plt.plot(decomposition.observed, label='Observed')
+plt.legend()
+plt.subplot(4, 1, 2)
+plt.plot(decomposition.trend, label='Trend')
+plt.legend()
 
-df_cleaned.dropna(subset=['Status'], inplace=True)
+plt.subplot(4, 1, 3)
+plt.plot(decomposition.seasonal, label='Seasonal')
+plt.legend()
 
-# Mean imputation
-df_mean_imputed = df_cleaned.copy()
-df_mean_imputed['Age'].fillna(df_mean_imputed['Age'].mean(), inplace=True)
-print("\nDataFrame after mean imputation:\n", round(df_mean_imputed))
+plt.subplot(4, 1, 4)
+plt.plot(decomposition.resid, label='Residual')
+plt.legend()
 
-# Median imputation
-df_median_imputed = df_cleaned.copy()
-df_median_imputed['Age'].fillna(df_median_imputed['Age'].median(), inplace=True)
-print("\nDataFrame after median imputation:\n", df_median_imputed)
-
-
-
-
+plt.tight_layout()
+plt.show()
 

@@ -106,6 +106,13 @@ OrigDataSel<-DataCleaned[,3]
 
 Pred<-matrix(0,nrow(boot_results),nrow(OrigDataSel))
 
+for (i in 1:nrow(boot_results)) {
+   for (j in 1:nrow(OrigDataSel)) {
+        Pred[[i,j]]<-sum(boot_results[i,1]+boot_results[i,2]*OrigDataSel[j,1])
+    }
+}
+
+
 
 
 

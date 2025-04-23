@@ -76,31 +76,30 @@ print(DataCleaned)
 #Creating a bootstrap sample from the cleaned data
 bootDataCleaned=DataCleaned[sample(nrow(DataCleaned), 1000, replace=TRUE), ]
 
-#Machine Learning (Assume all assumptions are met)
-#Splitting the data 70:30 
-set.seed(25)
-samp <- sample(nrow(bootDataCleaned), 0.7 * nrow(bootDataCleaned))
-train <- bootDataCleaned[samp, ]
-test <- bootDataCleaned[-samp, ]
+#Machine Learning (Assume all assumptions are met)######################################################################
+# Bootstrapping
+boot_samples <- 1000  # Number of bootstrap samples
+boot_results <- matrix(0, nrow = boot_samples, nrow(DataCleaned))
 
-#Training the model
-# Fit the model and obtain summary
-model <- lm(Salary ~ Age, data = train)
-summary(model)
+# Fit MLR models to bootstrap samples
+# create an empty list to store the samples
+boot_data <- list()
+RMSE <- list()
 
-# Make predictions on the test set
-predictions <- predict(model, test)
+for (i in 1:boot_samples) {
+  # Bootstrap sample
+  samp<-sample(nrow(DataCleaned), replace = TRUE)
+  boot_data[[i]]<-DataCleaned[samp,]
+  
+  # Fit MLR model using selected variables
+  mlr_model <- lm(Salary~ Age, data = boot_data[[i]])
+  
+ # Store coefficient estimates
+  boot_results[i, ] <- coef(mlr_model)
 
-# Put height and prediction in a dataframe
-eval <- cbind(test$Salary, predictions)
-colnames(eval) <- c("Y", "Yhat")
-eval <- as.data.frame(eval)
-head(eval)
-
-# Evaluate model performance with root mean square error
-mse <- mean((eval$Y - eval$Yhat)^2)
-rmse <- sqrt(mse)
-rmse
+}
+# view the first sample
+head(boot_data[[1]])
 
 #Evaluated model performance with observed vs predictive plots
 

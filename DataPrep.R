@@ -120,7 +120,17 @@ for (i in 1:nrow(boot_results)) {
   }
 }
 
+residuals<-Act-Pred
+ErrSq<-residuals^2
 
+SSE<- rowSums(ErrSq)
+
+MSE<-SSE/nrow(CBloom4_24)
+
+RMSE<-sqrt(MSE)
+hist(RMSE)
+
+shapiro.test(RMSE)
 
 
 

@@ -112,6 +112,16 @@ for (i in 1:nrow(boot_results)) {
     }
 }
 
+Actual<-matrix(0,nrow(boot_results),nrow(CBloom4_24))
+
+for (i in 1:nrow(boot_results)) {
+   for (j in 1:nrow(DataCleaned)) {
+      Actual[[i,j]]<-DataCleaned[j,7]
+  }
+}
+
+
+
 
 
 

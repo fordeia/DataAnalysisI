@@ -116,7 +116,7 @@ Act<-matrix(0,nrow(boot_results),nrow(DataCleaned))
 
 for (i in 1:nrow(boot_results)) {
    for (j in 1:nrow(DataCleaned)) {  
-      Act[[i,j]]<-DataCleaned[j,7]
+      Act[[i,j]]<-unlist(DataCleaned[j,7])
   }
 }
 

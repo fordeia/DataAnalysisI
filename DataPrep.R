@@ -113,7 +113,7 @@ for (i in 1:nrow(boot_results)) {
 }
 
 Actual<-matrix(0,nrow(boot_results),nrow(DataCleaned))
-
+is.matrix(Actual)
 
 for (i in 1:nrow(boot_results)) {
    for (j in 1:nrow(DataCleaned)) {

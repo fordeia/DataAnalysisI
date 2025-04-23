@@ -102,7 +102,7 @@ head(boot_data[[1]])
 
 #Evaluating the model
 
-OrigDataSel<-CBloom4_24[,-c(1,3,4)]
+OrigDataSel<-DataCleaned[,3]
 
 Pred<-matrix(0,nrow(boot_results),nrow(OrigDataSel))
 

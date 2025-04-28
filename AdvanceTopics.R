@@ -106,7 +106,7 @@ head(selected_components)
 regression_data <- data.frame(my_data$outcome, selected_components) # Combine outcome and PCs
 
 # 5. Perform MLR
-regression_model <- lm(my_data$outcome ~ ., data = regression_data)
+regression_model <- lm(my_data$outcome ~ PC1 + PC2, data = regression_data)
 summary(regression_model)
 
 

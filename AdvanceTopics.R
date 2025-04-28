@@ -100,6 +100,7 @@ summary(pca_result)
 # 3. Select components (e.g., first two)
 pca_data <- data.frame(pca_result$x)
 selected_components <- pca_data[, 1:2]
+head(selected_components)
 
 # 4. Prepare data for MLR
 regression_data <- data.frame(my_data$outcome, selected_components) # Combine outcome and PCs

@@ -1,4 +1,4 @@
 #Installing and unloading packages
 install.packages("pacman")
-libray(pacman)
+library(pacman)
 library(tidyverse)

@@ -103,7 +103,7 @@ selected_components <- pca_data[, 1:2]
 head(selected_components)
 
 #Loading of components with respect to the variables
-selected_components$loadings[, 1:2]
+pca_result$loadings[, 1:2]
 
 # 4. Prepare data for MLR
 regression_data <- data.frame(my_data$outcome, selected_components) # Combine outcome and PCs

@@ -9,3 +9,9 @@ retail <- read_csv("https://raw.githubusercontent.com/PacktPublishing/Forecastin
 #Ploting the time series 
 retailtimeseries <- ts(retail)
 plot.ts(retailtimeseries)
+
+#Smoothing using a moving average of 3
+install.packages("TTR")
+library("TTR")
+retailtimeseriesSMA3 <- SMA(retailtimeseries,n=3)
+plot.ts(retailtimeseriesSMA3)

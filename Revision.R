@@ -15,3 +15,6 @@ install.packages("TTR")
 library("TTR")
 retailtimeseriesSMA3 <- SMA(retailtimeseries,n=3)
 plot.ts(retailtimeseriesSMA3)
+
+retailtimeseriescomponents <- decompose(retailtimeseries)
+

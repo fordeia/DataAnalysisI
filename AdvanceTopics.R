@@ -97,6 +97,8 @@ pca_result <- prcomp(my_data[, 1:3], scale = TRUE, center = TRUE) # Don't includ
 # 2. Analyze PCA results
 summary(pca_result)
 
+#Display the loading with respect to the independent varialbes
+pca_result
 
 
 # 3. Select components (e.g., first two)

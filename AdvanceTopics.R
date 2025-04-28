@@ -111,6 +111,8 @@ install.packages("factoextra")
 library(factoextra)
 fviz_eig(pca_result, addlabels = TRUE)
 
+#Biplot to display the relationship between the PC and independent variables. 
+fviz_pca_var(pca_result, col.var = "black")
 
 # 4. Prepare data for MLR
 regression_data <- data.frame(my_data$outcome, selected_components) # Combine outcome and PCs

@@ -97,13 +97,18 @@ pca_result <- prcomp(my_data[, 1:3], scale = TRUE, center = TRUE) # Don't includ
 # 2. Analyze PCA results
 summary(pca_result)
 
+
+
 # 3. Select components (e.g., first two)
 pca_data <- data.frame(pca_result$x)
 selected_components <- pca_data[, 1:2]
 head(selected_components)
 
-#Loading of components with respect to the variables
-pca_result$loadings[, 1:2]
+#Scree plot
+install.packages("factoextra")
+library(factoextra)
+fviz_eig(pca_result, addlabels = TRUE)
+
 
 # 4. Prepare data for MLR
 regression_data <- data.frame(my_data$outcome, selected_components) # Combine outcome and PCs

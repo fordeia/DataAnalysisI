@@ -121,6 +121,29 @@ regression_data <- data.frame(my_data$outcome, selected_components) # Combine ou
 regression_model <- lm(my_data$outcome ~ PC1 + PC2, data = regression_data)
 summary(regression_model)
 
+#Assignment of for PCA
+data("iris")
+str(iris)
+head(iris)
+
+#Finding the PCA
+pc <- prcomp(iris[,-5],
+             center = TRUE,
+            scale. = TRUE)
+summary(pc)
+pc
+
+#Scree plot
+fviz_eig(pc, addlabels = TRUE)
+
+#Biplot
+fviz_pca_var(pc, col.var = "black")
+
+
+
+
+
+
 
 
 

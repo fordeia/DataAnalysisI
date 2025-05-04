@@ -11,3 +11,8 @@ summary(pca_result)
 #Display the loading with respect to the independent varialbes
 pca_result
 
+#Scree plot
+install.packages("factoextra")
+library(factoextra)
+fviz_eig(pca_result, addlabels = TRUE)
+

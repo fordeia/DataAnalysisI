@@ -48,7 +48,7 @@ rainseriesforecasts <- HoltWinters(rainseries, beta=FALSE, gamma=FALSE)
 rainseriesforecasts
 
 #The forcasted time series
-rainseriesforecasts$fitted
+head(rainseriesforecasts$fitted)
 
 #Plot
 plot(rainseriesforecasts)

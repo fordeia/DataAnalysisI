@@ -26,3 +26,11 @@ n_components <- which(cumulative_variance >= 0.95)[1] # Keep until 95% explained
 X_pca <- as.data.frame(pca_result$x[, 1:n_components])
 head(X_pca)
 
+# Prepare data for MLR
+regression_data <- data.frame(mtcars$mpg, X_pca) # Combine outcome and PCs
+
+# Perform MLR with PC
+regression_model <- lm(mtcars$mpg ~PC1 + PC2 + PC3 + PC4 + PC5 + PC6, data = regression_data)
+summary(regression_model)
+
+

@@ -47,10 +47,10 @@ plot.ts(rainseries)
 rainseriesforecasts <- HoltWinters(rainseries, beta=FALSE, gamma=FALSE)
 rainseriesforecasts
 
-#The forcasted time series
+#The forcasted time series for simple exponential smoothing
 head(rainseriesforecasts$fitted)
 
-#Plot
+#Plot for the simple exponential smoothing
 plot(rainseriesforecasts)
 
 #Sum of square error to estimate accuracy of the forecast. 

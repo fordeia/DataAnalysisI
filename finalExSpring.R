@@ -16,3 +16,6 @@ install.packages("factoextra")
 library(factoextra)
 fviz_eig(pca_result, addlabels = TRUE)
 
+#Biplot to display the relationship between the PC and independent variables. 
+fviz_pca_var(pca_result, col.var = "black")
+

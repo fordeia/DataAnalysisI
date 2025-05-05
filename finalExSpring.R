@@ -6,7 +6,29 @@ x <- c(data1,data2, ...)
 qqnorm(x)
 qqline(x)
 
+#One sample t-test
+t.test(x, mu = 3, alternative = "greater")
 
+#Question 2 ==============================
+#Contingency table
+Contintable=matrix(c(data1, data2, ...),ncol=3) 
+ colnames(Contintable)=c("favor","indifferent","opposed") 
+ rownames(Contintable)=c("Party A","Party B")
+ Contintable
+
+# Balloon plot
+library("gplots") 
+#convert the data as a table 
+dt <- as.table(as.matrix(Contintable)) 
+#Graph 
+balloonplot(t(dt), main ="Purchase", xlab ="", ylab="", label = FALSE, show.margins = FALSE) 
+
+#Chi-squared test for independence
+chisq<-chisq.test(Contintable) 
+chisq
+
+#Obtaining the expected value from a Chi-squared test of independence
+chisq$expected
 
 #Question 3 ==============================
 #Down loading the mtcars dataset

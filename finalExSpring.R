@@ -1,3 +1,13 @@
+#Question 1 ==============================
+#Q-Q Plot
+# read in the data
+x <- c(data1,data2, ...)
+# make the qqplot
+qqnorm(x)
+qqline(x)
+
+
+
 #Question 3 ==============================
 #Down loading the mtcars dataset
 data("mtcars")

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Read the excel file
-df = pd.read_excel(r"C:\Users\fordeia\DataAnalysisI\Data_Cleaning.xlsx")
+df = pd.read_excel(r"./Data_Cleaning.xlsx")
 
 df_cleaned = df
 

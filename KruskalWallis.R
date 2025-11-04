@@ -6,7 +6,7 @@ library(openxlsx)
 #Importing data
 PlantGrowth<-PlantGrowth
 
-write.xlsx(PlantGrowth, 'C:/Users/fordeia/DataAnalysisI/PlantGrowth.xlsx')
+write.xlsx(PlantGrowth, './PlantGrowth.xlsx')
 head(PlantGrowth)
 
 #Displaying group levels

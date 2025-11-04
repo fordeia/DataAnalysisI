@@ -2,7 +2,7 @@ import statsmodels.api as sm
 import pandas as pd
 
 # Sample data (replace with your actual data)
-data = pd.read_excel(r"C:/Users/fordeia/DataAnalysisI/marketingData.xlsx")
+data = pd.read_excel(r"./marketingData.xlsx")
 df = pd.DataFrame(data)
 # Define the dependent and independent variables
 Y = df['sales']

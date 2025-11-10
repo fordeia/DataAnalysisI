@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 import numpy as np
+from itertools import combinations
 
 # Sample data for three groups
 ctr1 = [4.17, 5.58, 5.18, 6.11, 4.5, 4.61, 5.17, 4.53, 5.33, 5.14]
@@ -63,3 +64,12 @@ if p_value < alpha:
     print("The null hypothesis is rejected. There is a significant difference between the groups.")
 else:
     print("The null hypothesis is not rejected. There is no significant difference between the groups.")
+
+# ==============================
+# Pairwise Comparisons (Wilcoxon rank-sum / Mann-Whitney U)
+# ==============================
+print("\nPairwise comparisons (Wilcoxon rank-sum test with continuity correction):")
+groups = df.columns
+for g1, g2 in combinations(groups, 2):
+    stat, p = stats.ranksums(df[g1], df[g2])  # Wilcoxon rank-sum test
+    print(f"{g1} vs {g2}: statistic={stat:.4f}, p-value={p:.4f}")

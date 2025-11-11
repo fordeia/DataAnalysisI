@@ -1,13 +1,4 @@
 ################################################################################
-# SCRIPT TITLE: DATA CLEANING, SUMMARIZATION, VISUALIZATION & BOOTSTRAPPING IN R
-# DESCRIPTION: End-to-end workflow demonstrating data cleaning, transformation,
-#              visualization, simple and multiple regression, and bootstrapping.
-# AUTHOR: [Your Name]
-# DATE: [Insert Date]
-################################################################################
-
-
-################################################################################
 # 1. LOAD REQUIRED PACKAGES
 ################################################################################
 
@@ -204,3 +195,4 @@ shapiro.test(RMSE)
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+

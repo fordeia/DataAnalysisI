@@ -1,141 +1,206 @@
--#Loading packages
+################################################################################
+# SCRIPT TITLE: DATA CLEANING, SUMMARIZATION, VISUALIZATION & BOOTSTRAPPING IN R
+# DESCRIPTION: End-to-end workflow demonstrating data cleaning, transformation,
+#              visualization, simple and multiple regression, and bootstrapping.
+# AUTHOR: [Your Name]
+# DATE: [Insert Date]
+################################################################################
+
+
+################################################################################
+# 1. LOAD REQUIRED PACKAGES
+################################################################################
+
 library(tidyverse)
 library(readxl)
 library(forcats)
 library(dplyr)
 
 
-Data_to_clean<- read_excel("Data_Cleaning.xlsx")
+################################################################################
+# 2. IMPORT DATA
+################################################################################
+
+Data_to_clean <- read_excel("Data_Cleaning.xlsx")
 Data_to_clean
 
-Summarizing the variables with count
+
+################################################################################
+# 3. SUMMARIZE VARIABLES WITH COUNT
+################################################################################
+
 Data_to_clean %>% count(Gender)
 Data_to_clean %>% count(Age)
 Data_to_clean %>% count(Status)
 
-######workflow######
-#Reloading data
-Data_to_clean<- read_excel("Data_Cleaning.xlsx")
 
-#Remove rows with NA in specific colums
-DataCleaned<-(Data_to_clean %>%
-  filter(!is.na(Status)))
+################################################################################
+# 4. DATA CLEANING WORKFLOW
+################################################################################
 
-DataCleaned<-(DataCleaned %>%
-  distinct())
+# Reload data
+Data_to_clean <- read_excel("Data_Cleaning.xlsx")
 
-#Renaming levels
-DataCleaned$Gender <- fct_recode(DataCleaned$Gender, "female" = "Female", "female" ="femail")
+# Remove rows with missing Status
+DataCleaned <- Data_to_clean %>%
+  filter(!is.na(Status))
 
-DataCleaned$Age<-na_if(DataCleaned$Age, 999)
+# Remove duplicate rows
+DataCleaned <- DataCleaned %>%
+  distinct()
 
+# Rename / correct gender levels
+DataCleaned$Gender <- fct_recode(DataCleaned$Gender,
+                                 "female" = "Female",
+                                 "female" = "femail")
+
+# Replace placeholder values (999) with NA in Age
+DataCleaned$Age <- na_if(DataCleaned$Age, 999)
+
+# View intermediate cleaned dataset
 DataCleaned
 
-  # Impute with the mean
-        DataCleaned <- DataCleaned %>% 
-          mutate(Age = replace_na(Age, round(mean(Age, na.rm = TRUE))))
-        # Or, impute with the median
-        DataCleaned <- DataCleaned %>%
-          mutate(Age = replace_na(Age, median(Age, na.rm = TRUE)))
 
+################################################################################
+# 5. HANDLE MISSING VALUES BY IMPUTATION
+################################################################################
+
+# Impute with mean
+DataCleaned <- DataCleaned %>%
+  mutate(Age = replace_na(Age, round(mean(Age, na.rm = TRUE))))
+
+# Or impute with median
+DataCleaned <- DataCleaned %>%
+  mutate(Age = replace_na(Age, median(Age, na.rm = TRUE)))
+
+# View final cleaned dataset
 print(DataCleaned)
 
-#Boxplot
+
+################################################################################
+# 6. VISUALIZATION: COMPARATIVE BOX PLOT
+################################################################################
+
 p <- ggplot(DataCleaned, aes(Gender, Age))
-p + geom_boxplot() + ggtitle("Comparative Boxplot Gender vs Age")
+p + geom_boxplot() + ggtitle("Comparative Boxplot: Gender vs Age")
 
 
-#Adding a height variable
-DataCleaned$Height_cm <- c(160, 175, 155, 165, 178, 190, 191, 180, 159, 167, 167) 
+################################################################################
+# 7. ADDING A NEW VARIABLE (HEIGHT)
+################################################################################
+
+DataCleaned$Height_cm <- c(160, 175, 155, 165, 178, 190, 191, 180, 159, 167, 167)
 print(DataCleaned)
 
 
-# basic scatterplot
-ggplot(DataCleaned, aes(x=Age, y=Height_cm)) + 
-    geom_point() + ggtitle("Scatter plot Age vs Height")
+################################################################################
+# 8. SCATTER PLOT: AGE VS HEIGHT
+################################################################################
 
-#Log transformation of data
-DataCleaned$Log_Age<-log(DataCleaned$Age)
+ggplot(DataCleaned, aes(x = Age, y = Height_cm)) +
+  geom_point() +
+  ggtitle("Scatter Plot: Age vs Height")
+
+
+################################################################################
+# 9. LOG TRANSFORMATION OF AGE
+################################################################################
+
+DataCleaned$Log_Age <- log(DataCleaned$Age)
 print(DataCleaned)
 
-#Scatter plot log age versus height
-# basic scatterplot
-ggplot(DataCleaned, aes(x=Log_Age, y=Height_cm)) + 
-    geom_point() + ggtitle("Scatter plot Log Age vs Height")
+# Scatter plot: Log Age vs Height
+ggplot(DataCleaned, aes(x = Log_Age, y = Height_cm)) +
+  geom_point() +
+  ggtitle("Scatter Plot: Log(Age) vs Height")
 
-# Fitting Simple Linear Regression 
-lm.r= lm(formula = Height_cm ~ Log_Age,
-         data = DataCleaned)
-#Summary of the model
+
+################################################################################
+# 10. SIMPLE LINEAR REGRESSION: HEIGHT ~ LOG(AGE)
+################################################################################
+
+lm.r <- lm(formula = Height_cm ~ Log_Age, data = DataCleaned)
+
+# Display summary
 summary(lm.r)
 
-#Adding a salary variable
-DataCleaned$Salary<- c(35,22, 55, 25, 23, 20,40, 45, 25, 19, 41) 
+
+################################################################################
+# 11. ADDING A SALARY VARIABLE
+################################################################################
+
+DataCleaned$Salary <- c(35, 22, 55, 25, 23, 20, 40, 45, 25, 19, 41)
 print(DataCleaned)
 
-#Creating a bootstrap sample from the cleaned data
-bootDataCleaned=DataCleaned[sample(nrow(DataCleaned), 1000, replace=TRUE), ]
 
-#Machine Learning (Assume all assumptions are met)######################################################################
-# Bootstrapping
+################################################################################
+# 12. CREATE A BOOTSTRAP SAMPLE
+################################################################################
+
+bootDataCleaned <- DataCleaned[sample(nrow(DataCleaned), 1000, replace = TRUE), ]
+
+
+################################################################################
+# 13. BOOTSTRAPPING & MULTIPLE LINEAR REGRESSION
+################################################################################
+
 boot_samples <- 1000  # Number of bootstrap samples
-boot_results <- matrix(0, nrow = boot_samples, ncol = 2 )
+boot_results <- matrix(0, nrow = boot_samples, ncol = 2)
 
-# Fit MLR models to bootstrap samples
-# create an empty list to store the samples
+# Empty list to store bootstrap samples
 boot_data <- list()
 
 for (i in 1:boot_samples) {
+  
   # Bootstrap sample
-  samp<-sample(nrow(DataCleaned), replace = TRUE)
-  boot_data[[i]]<-DataCleaned[samp,]
+  samp <- sample(nrow(DataCleaned), replace = TRUE)
+  boot_data[[i]] <- DataCleaned[samp, ]
   
-  # Fit MLR model using selected variables
-  mlr_model <- lm(Salary~ Age, data = boot_data[[i]])
+  # Fit MLR model (Salary ~ Age)
+  mlr_model <- lm(Salary ~ Age, data = boot_data[[i]])
   
- # Store coefficient estimates
+  # Store coefficients
   boot_results[i, ] <- coef(mlr_model)
-
 }
-# view the first sample
+
+# View first bootstrap sample
 head(boot_data[[1]])
 
-#Evaluating the model
 
-OrigDataSel<-DataCleaned[,3]
+################################################################################
+# 14. MODEL EVALUATION
+################################################################################
 
-Pred<-matrix(0,nrow(boot_results),nrow(OrigDataSel))
+OrigDataSel <- DataCleaned[, 3]
 
-for (i in 1:nrow(boot_results)) {
-   for (j in 1:nrow(OrigDataSel)) {
-        Pred[[i,j]]<-sum(boot_results[i,1]+boot_results[i,2]*OrigDataSel[j,1])
-    }
-}
-
-Act<-matrix(0,nrow(boot_results),nrow(DataCleaned))
+Pred <- matrix(0, nrow(boot_results), nrow(OrigDataSel))
 
 for (i in 1:nrow(boot_results)) {
-   for (j in 1:nrow(DataCleaned)) {  
-      Act[[i,j]]<-unlist(DataCleaned[j,7])
+  for (j in 1:nrow(OrigDataSel)) {
+    Pred[[i, j]] <- sum(boot_results[i, 1] + boot_results[i, 2] * OrigDataSel[j, 1])
   }
 }
 
-residuals<-Act-Pred
-ErrSq<-residuals^2
+Act <- matrix(0, nrow(boot_results), nrow(DataCleaned))
 
-SSE<- rowSums(ErrSq)
+for (i in 1:nrow(boot_results)) {
+  for (j in 1:nrow(DataCleaned)) {
+    Act[[i, j]] <- unlist(DataCleaned[j, 7])
+  }
+}
 
-MSE<-SSE/nrow(DataCleaned)
+residuals <- Act - Pred
+ErrSq <- residuals^2
+SSE <- rowSums(ErrSq)
+MSE <- SSE / nrow(DataCleaned)
+RMSE <- sqrt(MSE)
 
-RMSE<-sqrt(MSE)
-hist(RMSE)
+# Visualize RMSE distribution
+hist(RMSE, main = "Histogram of RMSE (Bootstrap)", col = "skyblue", border = "black")
 
+# Normality test for RMSE
 shapiro.test(RMSE)
 
-
-
-
-
-
-
-
+################################################################################
+# END OF SCRIPT
+################################################################################

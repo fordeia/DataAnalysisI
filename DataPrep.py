@@ -173,26 +173,64 @@ print(first_model.summary())
 # Model evaluation (RMSE computation)
 # ============================================================
 
-OrigDataSel = DataCleaned[['Age']].values
-Pred = np.zeros((boot_results.shape[0], OrigDataSel.shape[0]))
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
 
-for i in range(boot_results.shape[0]):
-    intercept, slope = boot_results[i, :]
-    Pred[i, :] = intercept + slope * OrigDataSel.flatten()
+# Example: assume DataCleaned is a pandas DataFrame with columns 'Salary', 'Age', 'Experience'
+# DataCleaned = pd.read_csv("your_data.csv")  
 
-Act = np.tile(DataCleaned['Salary'].values, (boot_results.shape[0], 1))
-residuals = Act - Pred
-ErrSq = residuals**2
-SSE = ErrSq.sum(axis=1)
-MSE = SSE / len(DataCleaned)
-RMSE = np.sqrt(MSE)
+boot_samples = 1000  # number of bootstrap samples
+n = len(DataCleaned)
 
-plt.hist(RMSE, bins=20, color='skyblue', edgecolor='black')
-plt.title("Distribution of RMSE (Bootstrap)")
+# Store results
+coef_list = []
+rmse_list = []
+r2_list = []
+
+for i in range(boot_samples):
+    # Bootstrap sample
+    boot_data = DataCleaned.sample(n=n, replace=True)
+    
+    # Regression: Salary ~ Age + Experience
+    X = boot_data[['Age', 'Experience']]
+    X = sm.add_constant(X)  # adds intercept
+    y = boot_data['Salary']
+    
+    model = sm.OLS(y, X).fit()
+    
+    # Store coefficients
+    coef_list.append(model.params.values)
+    
+    # Compute predictions and RMSE
+    y_pred = model.predict(X)
+    rmse = np.sqrt(np.mean((y - y_pred)**2))
+    rmse_list.append(rmse)
+    
+    # Store R-squared
+    r2_list.append(model.rsquared)
+
+# Convert results to DataFrame for easy analysis
+boot_results = pd.DataFrame(coef_list, columns=['Intercept', 'Age', 'Experience'])
+boot_results['RMSE'] = rmse_list
+boot_results['R2'] = r2_list
+
+# Example visualizations
+plt.hist(boot_results['RMSE'], bins=30, color='skyblue', edgecolor='black')
+plt.title('Bootstrap RMSE Distribution')
+plt.xlabel('RMSE')
+plt.ylabel('Frequency')
 plt.show()
 
-# Shapiro-Wilk normality test for RMSE
-stat, p = shapiro(RMSE)
-print(f"Shapiro-Wilk Test: Statistic={stat:.3f}, p-value={p:.3f}")
+plt.hist(boot_results['R2'], bins=30, color='lightgreen', edgecolor='black')
+plt.title('Bootstrap R² Distribution')
+plt.xlabel('R²')
+plt.ylabel('Frequency')
+plt.show()
+
+# ============================================================
+# End of Script
+# ============================================================
 
 

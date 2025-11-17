@@ -129,18 +129,45 @@ bootstrap_samples = [
 # Bootstrapping process: Multiple Linear Regression
 # ============================================================
 
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+
+# Assume DataCleaned is a pandas DataFrame with columns: "Salary", "Age"
+
 boot_samples = 1000
-boot_results = np.zeros((boot_samples, 2))
+boot_results = np.zeros((boot_samples, 2))   # intercept + slope
+boot_data = []       # to store bootstrap samples
+boot_models = []     # to store fitted models
+
+n = len(DataCleaned)
 
 for i in range(boot_samples):
-    samp = resample(DataCleaned, replace=True)
-    X = sm.add_constant(samp['Age'])
-    y = samp['Salary']
+
+    # Bootstrap sample (same size as original)
+    samp_idx = np.random.choice(n, n, replace=True)
+    boot_df = DataCleaned.iloc[samp_idx].copy()
+    boot_data.append(boot_df)
+
+    # Fit regression Salary ~ Age
+    X = sm.add_constant(boot_df["Age"])   # add intercept
+    y = boot_df["Salary"]
+    
     model = sm.OLS(y, X).fit()
+    boot_models.append(model)
+
+    # Store coefficients
     boot_results[i, :] = model.params.values
 
-# View the first few coefficient estimates
-print(boot_results[:5, :])
+# ===================================
+# View first bootstrap regression model
+# ===================================
+first_model = boot_models[0]
+print(first_model.summary())
+
+# (Optional) View first bootstrap dataset
+# print(boot_data[0].head())
+
 
 # ============================================================
 # Model evaluation (RMSE computation)
@@ -167,4 +194,5 @@ plt.show()
 # Shapiro-Wilk normality test for RMSE
 stat, p = shapiro(RMSE)
 print(f"Shapiro-Wilk Test: Statistic={stat:.3f}, p-value={p:.3f}")
+
 

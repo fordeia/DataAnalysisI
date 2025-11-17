@@ -136,7 +136,7 @@ bootstrap_samples <- lapply(1:1000, function(i) {
 
 
 ################################################################################
-# 13. BOOTSTRAPPING & MULTIPLE LINEAR REGRESSION
+# 13. BOOTSTRAPPING & LINEAR REGRESSION
 ################################################################################
 
 boot_samples <- 1000  # Number of bootstrap samples
@@ -144,6 +144,9 @@ boot_results <- matrix(0, nrow = boot_samples, ncol = 2)
 
 # Empty list to store bootstrap datasets
 boot_data <- vector("list", boot_samples)
+
+# Empty list to store models if you want them
+boot_models <- vector("list", boot_samples)
 
 for (i in 1:boot_samples) {
   
@@ -155,12 +158,19 @@ for (i in 1:boot_samples) {
   # Fit MLR model (Salary ~ Age)
   mlr_model <- lm(Salary ~ Age, data = boot_data[[i]])
   
+  # Store the model
+  boot_models[[i]] <- mlr_model
+  
   # Store coefficients (intercept + slope)
   boot_results[i, ] <- coef(mlr_model)
 }
 
-# View first bootstrap sample
-head(boot_data[[1]])
+# =========================================
+# 🔍 View the first bootstrap regression model
+# =========================================
+first_model <- boot_models[[1]]
+summary(first_model)
+
 
 
 ################################################################################
@@ -200,6 +210,7 @@ shapiro.test(RMSE)
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+
 
 
 

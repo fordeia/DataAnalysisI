@@ -128,7 +128,11 @@ print(DataCleaned)
 # 12. CREATE A BOOTSTRAP SAMPLE
 ################################################################################
 
-bootDataCleaned <- DataCleaned[sample(nrow(DataCleaned), 1000, replace = TRUE), ]
+set.seed(123)  # for reproducibility
+
+bootstrap_samples <- lapply(1:1000, function(i) {
+  DataCleaned[sample(nrow(DataCleaned), nrow(DataCleaned), replace = TRUE), ]
+})
 
 
 ################################################################################
@@ -195,6 +199,7 @@ shapiro.test(RMSE)
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+
 
 
 

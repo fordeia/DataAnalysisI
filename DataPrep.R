@@ -142,19 +142,20 @@ bootstrap_samples <- lapply(1:1000, function(i) {
 boot_samples <- 1000  # Number of bootstrap samples
 boot_results <- matrix(0, nrow = boot_samples, ncol = 2)
 
-# Empty list to store bootstrap samples
-boot_data <- list()
+# Empty list to store bootstrap datasets
+boot_data <- vector("list", boot_samples)
 
 for (i in 1:boot_samples) {
   
-  # Bootstrap sample
-  samp <- sample(nrow(DataCleaned), replace = TRUE)
+  # Bootstrap sample (same number of rows as original)
+  samp <- sample(nrow(DataCleaned), nrow(DataCleaned), replace = TRUE)
+  
   boot_data[[i]] <- DataCleaned[samp, ]
   
   # Fit MLR model (Salary ~ Age)
   mlr_model <- lm(Salary ~ Age, data = boot_data[[i]])
   
-  # Store coefficients
+  # Store coefficients (intercept + slope)
   boot_results[i, ] <- coef(mlr_model)
 }
 
@@ -199,6 +200,7 @@ shapiro.test(RMSE)
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+
 
 
 

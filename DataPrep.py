@@ -115,8 +115,15 @@ print(DataCleaned)
 # Creating a bootstrap sample
 # ============================================================
 
-bootDataCleaned = resample(DataCleaned, replace=True, n_samples=1000, random_state=42)
-print(bootDataCleaned.head())
+import numpy as np
+
+bootstrap_samples = [
+    DataCleaned.sample(
+        n=len(DataCleaned), 
+        replace=True
+    )
+    for _ in range(1000)
+]
 
 # ============================================================
 # Bootstrapping process: Multiple Linear Regression
@@ -160,3 +167,4 @@ plt.show()
 # Shapiro-Wilk normality test for RMSE
 stat, p = shapiro(RMSE)
 print(f"Shapiro-Wilk Test: Statistic={stat:.3f}, p-value={p:.3f}")
+

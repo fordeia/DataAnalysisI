@@ -177,29 +177,27 @@ summary(first_model)
 # 14. MODEL EVALUATION
 ################################################################################
 
-OrigDataSel <- DataCleaned[, 3]
+# Original predictor (Age, assuming column 3)
+OrigDataSel <- DataCleaned[, 3]  
 
-Pred <- matrix(0, nrow(boot_results), nrow(OrigDataSel))
+# Prepare matrices
+n_boot <- nrow(boot_results)
+n_obs <- nrow(DataCleaned)
+Pred <- matrix(0, nrow = n_boot, ncol = n_obs)
 
-for (i in 1:nrow(boot_results)) {
-  for (j in 1:nrow(OrigDataSel)) {
-    Pred[[i, j]] <- sum(boot_results[i, 1] + boot_results[i, 2] * OrigDataSel[j, 1])
-  }
+# Compute predictions for each bootstrap model
+for (i in 1:n_boot) {
+  Pred[i, ] <- boot_results[i, 1] + boot_results[i, 2] * OrigDataSel
 }
 
-Act <- matrix(0, nrow(boot_results), nrow(DataCleaned))
+# Actual outcomes (Salary, assuming column 7)
+Act <- matrix(rep(DataCleaned[, 7], each = n_boot), nrow = n_boot)
 
-for (i in 1:nrow(boot_results)) {
-  for (j in 1:nrow(DataCleaned)) {
-    Act[[i, j]] <- unlist(DataCleaned[j, 7])
-  }
-}
-
+# Residuals
 residuals <- Act - Pred
-ErrSq <- residuals^2
-SSE <- rowSums(ErrSq)
-MSE <- SSE / nrow(DataCleaned)
-RMSE <- sqrt(MSE)
+
+# RMSE for each bootstrap
+RMSE <- sqrt(rowMeans(residuals^2))
 
 # Visualize RMSE distribution
 hist(RMSE, main = "Histogram of RMSE (Bootstrap)", col = "skyblue", border = "black")
@@ -210,6 +208,7 @@ shapiro.test(RMSE)
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+
 
 
 

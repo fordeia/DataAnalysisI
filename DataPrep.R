@@ -181,8 +181,7 @@ OrigDataSel <- DataCleaned$Age
 
 # Prepare matrices
 n_boot <- nrow(boot_results)
-n_obs  <- nrow(DataCleaned)
-
+n_obs <- nrow(DataCleaned)
 Pred <- matrix(0, nrow = n_boot, ncol = n_obs)
 
 # Compute predictions for each bootstrap model
@@ -190,25 +189,23 @@ for (i in 1:n_boot) {
   Pred[i, ] <- boot_results[i, 1] + boot_results[i, 2] * OrigDataSel
 }
 
-# Actual outcomes (use column name instead of column number)
-Act <- matrix(rep(DataCleaned$Salary, each = n_boot), nrow = n_boot, byrow = TRUE)
+# Actual outcomes (Salary)
+Act <- matrix(rep(DataCleaned$Salary, each = n_boot), nrow = n_boot)
 
-# Residuals matrix
+# Residuals
 residuals <- Act - Pred
 
-# RMSE for each bootstrap sample
+# RMSE for each bootstrap
 RMSE <- sqrt(rowMeans(residuals^2))
 
-# Histogram of RMSE values
-hist(RMSE,
-     main = "Histogram of Bootstrap RMSE",
-     xlab = "RMSE",
-     col = "skyblue",
-     border = "black")
+# Visualize RMSE distribution with mean line
+hist(RMSE, main = "Bootstrap RMSE Distribution", col = "skyblue", border = "black")
+abline(v = mean(RMSE), col = "red", lwd = 2)
 
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+
 
 
 

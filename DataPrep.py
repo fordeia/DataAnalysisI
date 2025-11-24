@@ -45,7 +45,8 @@ DataCleaned = DataCleaned.drop_duplicates()
 # 4.4 Correct spelling errors in Gender
 DataCleaned['Gender'] = DataCleaned['Gender'].replace({
     'Female': 'female',
-    'femail': 'female'
+    'femail': 'female',
+    'male ': 'male'
 })
 
 # 4.5 Replace placeholder (999) with NaN
@@ -191,5 +192,6 @@ plt.show()
 ################################################################################
 # End of Script
 ################################################################################
+
 
 

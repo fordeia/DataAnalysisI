@@ -152,48 +152,44 @@ first_model = boot_models[0]
 print(first_model.summary())
 
 ################################################################################
-# 14. MODEL EVALUATION: RMSE
+# 14. MODEL EVALUATION — EXACT PYTHON EQUIVALENT OF THE R CODE (FIXED)
 ################################################################################
 
-coef_list = []
-rmse_list = []
-r2_list = []
+# Extract original Age column
+OrigDataSel = DataCleaned['Age'].values
+n_boot = boot_results.shape[0]     # number of bootstrap models
+n_obs = len(DataCleaned)
 
-for i in range(boot_samples):
-    boot_data_i = DataCleaned.sample(n=n, replace=True)
-    
-    X = boot_data_i[['Age']]  # example with Age only
-    X = sm.add_constant(X)
-    y = boot_data_i['Salary']
-    
-    model = sm.OLS(y, X).fit()
-    
-    coef_list.append(model.params.values)
-    
-    y_pred = model.predict(X)
-    rmse = np.sqrt(np.mean((y - y_pred)**2))
-    rmse_list.append(rmse)
-    
-    r2_list.append(model.rsquared)
+# Convert bootstrap coefficients to arrays
+intercepts = boot_results[:, 0]
+ageslope   = boot_results[:, 1]
 
-boot_results_df = pd.DataFrame(coef_list, columns=['Intercept', 'Age'])
-boot_results_df['RMSE'] = rmse_list
-boot_results_df['R2'] = r2_list
+# Prepare prediction matrix (n_boot × n_obs)
+Pred = np.zeros((n_boot, n_obs))
 
-plt.hist(boot_results_df['RMSE'], bins=30, color='skyblue', edgecolor='black')
-plt.axvline(x=np.mean(boot_results_df['RMSE']), color='red', linewidth=2)
-plt.title('Bootstrap RMSE Distribution')
+# Compute predictions for each bootstrap model
+for i in range(n_boot):
+    Pred[i, :] = intercepts[i] + ageslope[i] * OrigDataSel
+
+# Actual outcomes (replicated original Salary)
+Act = np.tile(DataCleaned['Salary'].values, (n_boot, 1))
+
+# Residuals
+residuals = Act - Pred
+
+# RMSE for each bootstrap
+RMSE = np.sqrt(np.mean(residuals**2, axis=1))
+
+# Plot RMSE distribution
+plt.hist(RMSE, bins=30, color='skyblue', edgecolor='black')
+plt.axvline(np.mean(RMSE), color='red', linewidth=2)
+plt.title('Bootstrap RMSE Distribution (Evaluated on Original Data)')
 plt.xlabel('RMSE')
-plt.ylabel('Frequency')
-plt.show()
-
-plt.hist(boot_results_df['R2'], bins=30, color='lightgreen', edgecolor='black')
-plt.title('Bootstrap R² Distribution')
-plt.xlabel('R²')
 plt.ylabel('Frequency')
 plt.show()
 
 ################################################################################
 # End of Script
 ################################################################################
+
 

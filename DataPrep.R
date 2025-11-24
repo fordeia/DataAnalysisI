@@ -206,12 +206,10 @@ hist(RMSE,
      col = "skyblue",
      border = "black")
 
-# Shapiro–Wilk normality test on RMSE distribution
-shapiro.test(RMSE)
-
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+
 
 
 

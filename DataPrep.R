@@ -172,13 +172,12 @@ first_model <- boot_models[[1]]
 summary(first_model)
 
 
-
 ################################################################################
 # 14. MODEL EVALUATION
 ################################################################################
 
-# Original predictor (Age, assuming column 3)
-OrigDataSel <- DataCleaned[, 3]  
+# Use Age explicitly (avoid hard-coding column numbers)
+OrigDataSel <- DataCleaned$Age  
 
 # Prepare matrices
 n_boot <- nrow(boot_results)
@@ -208,6 +207,7 @@ shapiro.test(RMSE)
 ################################################################################
 # END OF SCRIPT
 ################################################################################
+
 
 
 

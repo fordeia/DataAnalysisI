@@ -1,6 +1,6 @@
-# ============================================================
-# Loading packages
-# ============================================================
+################################################################################
+# 1. LOAD PACKAGES
+################################################################################
 
 import pandas as pd
 import numpy as np
@@ -10,227 +10,189 @@ from sklearn.utils import resample
 import statsmodels.api as sm
 from scipy.stats import shapiro
 
-# ============================================================
-# Reading the dataset
-# ============================================================
+################################################################################
+# 2. READ THE DATASET
+################################################################################
 
-# Load Excel data (same as read_excel in R)
+# 2.1 Load Excel data
 Data_to_clean = pd.read_excel("Data_Cleaning.xlsx")
 print(Data_to_clean)
 
-# ============================================================
-# Summarizing variables with count
-# ============================================================
+################################################################################
+# 3. SUMMARIZE VARIABLES WITH COUNT
+################################################################################
 
+# 3.1 Count Gender
 print(Data_to_clean['Gender'].value_counts())
+# 3.2 Count Age
 print(Data_to_clean['Age'].value_counts())
+# 3.3 Count Status
 print(Data_to_clean['Status'].value_counts())
 
-# ============================================================
-# Workflow: Data Cleaning
-# ============================================================
+################################################################################
+# 4. DATA CLEANING WORKFLOW
+################################################################################
 
-# Reload data
+# 4.1 Reload data
 Data_to_clean = pd.read_excel("Data_Cleaning.xlsx")
 
-# Remove rows with missing Status
+# 4.2 Remove rows with missing Status
 DataCleaned = Data_to_clean[~Data_to_clean['Status'].isna()]
 
-# Remove duplicate rows
+# 4.3 Remove duplicate rows
 DataCleaned = DataCleaned.drop_duplicates()
 
-# Correcting spelling errors in Gender
+# 4.4 Correct spelling errors in Gender
 DataCleaned['Gender'] = DataCleaned['Gender'].replace({
     'Female': 'female',
     'femail': 'female'
 })
 
-# Replace placeholder (999) with NaN
+# 4.5 Replace placeholder (999) with NaN
 DataCleaned['Age'] = DataCleaned['Age'].replace(999, np.nan)
 
-# ============================================================
-# Impute missing values
-# ============================================================
+################################################################################
+# 5. HANDLE MISSING VALUES
+################################################################################
 
-# Impute with mean
+# 5.1 Impute with mean
 DataCleaned['Age'] = DataCleaned['Age'].fillna(round(DataCleaned['Age'].mean()))
 
-# Or impute with median (alternative)
+# 5.2 Or impute with median (alternative)
 # DataCleaned['Age'] = DataCleaned['Age'].fillna(DataCleaned['Age'].median())
 
 print(DataCleaned)
 
-# ============================================================
-# Boxplot: Gender vs Age
-# ============================================================
+################################################################################
+# 6. BOX PLOT: GENDER VS AGE
+################################################################################
 
 sns.boxplot(x='Gender', y='Age', data=DataCleaned)
 plt.title("Comparative Boxplot Gender vs Age")
 plt.show()
 
-# ============================================================
-# Adding a height variable
-# ============================================================
+################################################################################
+# 7. ADD HEIGHT VARIABLE
+################################################################################
 
 DataCleaned['Height_cm'] = [160, 175, 155, 165, 178, 190, 191, 180, 159, 167, 167]
 print(DataCleaned)
 
-# ============================================================
-# Scatter plot: Age vs Height
-# ============================================================
+################################################################################
+# 8. SCATTER PLOT: AGE VS HEIGHT
+################################################################################
 
 sns.scatterplot(x='Age', y='Height_cm', data=DataCleaned)
 plt.title("Scatter plot Age vs Height")
 plt.show()
 
-# ============================================================
-# Log transformation
-# ============================================================
+################################################################################
+# 9. LOG TRANSFORMATION OF AGE
+################################################################################
 
 DataCleaned['Log_Age'] = np.log(DataCleaned['Age'])
 print(DataCleaned)
 
-# Scatter plot: Log Age vs Height
+# 9.1 Scatter plot: Log Age vs Height
 sns.scatterplot(x='Log_Age', y='Height_cm', data=DataCleaned)
 plt.title("Scatter plot Log Age vs Height")
 plt.show()
 
-# ============================================================
-# Simple Linear Regression: Height ~ Log_Age
-# ============================================================
+################################################################################
+# 10. SIMPLE LINEAR REGRESSION: HEIGHT ~ LOG_AGE
+################################################################################
 
 X = sm.add_constant(DataCleaned['Log_Age'])
 y = DataCleaned['Height_cm']
 lm_r = sm.OLS(y, X).fit()
 print(lm_r.summary())
 
-# ============================================================
-# Adding a Salary variable
-# ============================================================
+################################################################################
+# 11. ADD SALARY VARIABLE
+################################################################################
 
 DataCleaned['Salary'] = [35, 22, 55, 25, 23, 20, 40, 45, 25, 19, 41]
 print(DataCleaned)
 
-# ============================================================
-# Creating a bootstrap sample
-# ============================================================
-
-import numpy as np
+################################################################################
+# 12. CREATE BOOTSTRAP SAMPLES
+################################################################################
 
 bootstrap_samples = [
-    DataCleaned.sample(
-        n=len(DataCleaned), 
-        replace=True
-    )
+    DataCleaned.sample(n=len(DataCleaned), replace=True)
     for _ in range(1000)
 ]
 
-# ============================================================
-# Bootstrapping process: Multiple Linear Regression
-# ============================================================
-
-import numpy as np
-import pandas as pd
-import statsmodels.api as sm
-
-# Assume DataCleaned is a pandas DataFrame with columns: "Salary", "Age"
+################################################################################
+# 13. BOOTSTRAPPING & LINEAR REGRESSION
+################################################################################
 
 boot_samples = 1000
-boot_results = np.zeros((boot_samples, 2))   # intercept + slope
-boot_data = []       # to store bootstrap samples
-boot_models = []     # to store fitted models
+boot_results = np.zeros((boot_samples, 2))
+boot_data = []
+boot_models = []
 
 n = len(DataCleaned)
 
 for i in range(boot_samples):
-
-    # Bootstrap sample (same size as original)
     samp_idx = np.random.choice(n, n, replace=True)
     boot_df = DataCleaned.iloc[samp_idx].copy()
     boot_data.append(boot_df)
 
-    # Fit regression Salary ~ Age
-    X = sm.add_constant(boot_df["Age"])   # add intercept
+    X = sm.add_constant(boot_df["Age"])
     y = boot_df["Salary"]
     
     model = sm.OLS(y, X).fit()
     boot_models.append(model)
 
-    # Store coefficients
     boot_results[i, :] = model.params.values
 
-# ===================================
-# View first bootstrap regression model
-# ===================================
+# 13.1 View first bootstrap regression model
 first_model = boot_models[0]
 print(first_model.summary())
 
-# (Optional) View first bootstrap dataset
-# print(boot_data[0].head())
+################################################################################
+# 14. MODEL EVALUATION: RMSE
+################################################################################
 
-
-# ============================================================
-# Model evaluation (RMSE computation)
-# ============================================================
-
-import numpy as np
-import pandas as pd
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
-
-# Example: assume DataCleaned is a pandas DataFrame with columns 'Salary', 'Age', 'Experience'
-# DataCleaned = pd.read_csv("your_data.csv")  
-
-boot_samples = 1000  # number of bootstrap samples
-n = len(DataCleaned)
-
-# Store results
 coef_list = []
 rmse_list = []
 r2_list = []
 
 for i in range(boot_samples):
-    # Bootstrap sample
-    boot_data = DataCleaned.sample(n=n, replace=True)
+    boot_data_i = DataCleaned.sample(n=n, replace=True)
     
-    # Regression: Salary ~ Age + Experience
-    X = boot_data[['Age', 'Experience']]
-    X = sm.add_constant(X)  # adds intercept
-    y = boot_data['Salary']
+    X = boot_data_i[['Age']]  # example with Age only
+    X = sm.add_constant(X)
+    y = boot_data_i['Salary']
     
     model = sm.OLS(y, X).fit()
     
-    # Store coefficients
     coef_list.append(model.params.values)
     
-    # Compute predictions and RMSE
     y_pred = model.predict(X)
     rmse = np.sqrt(np.mean((y - y_pred)**2))
     rmse_list.append(rmse)
     
-    # Store R-squared
     r2_list.append(model.rsquared)
 
-# Convert results to DataFrame for easy analysis
-boot_results = pd.DataFrame(coef_list, columns=['Intercept', 'Age', 'Experience'])
-boot_results['RMSE'] = rmse_list
-boot_results['R2'] = r2_list
+boot_results_df = pd.DataFrame(coef_list, columns=['Intercept', 'Age'])
+boot_results_df['RMSE'] = rmse_list
+boot_results_df['R2'] = r2_list
 
-# Example visualizations
-plt.hist(boot_results['RMSE'], bins=30, color='skyblue', edgecolor='black')
+plt.hist(boot_results_df['RMSE'], bins=30, color='skyblue', edgecolor='black')
+plt.axvline(x=np.mean(boot_results_df['RMSE']), color='red', linewidth=2)
 plt.title('Bootstrap RMSE Distribution')
 plt.xlabel('RMSE')
 plt.ylabel('Frequency')
 plt.show()
 
-plt.hist(boot_results['R2'], bins=30, color='lightgreen', edgecolor='black')
+plt.hist(boot_results_df['R2'], bins=30, color='lightgreen', edgecolor='black')
 plt.title('Bootstrap R² Distribution')
 plt.xlabel('R²')
 plt.ylabel('Frequency')
 plt.show()
 
-# ============================================================
+################################################################################
 # End of Script
-# ============================================================
-
-
+################################################################################

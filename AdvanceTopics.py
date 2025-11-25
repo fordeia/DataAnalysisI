@@ -95,3 +95,54 @@ plt.title("Kings Series - Moving Average (Order 8)")
 plt.xlabel("Observation")
 plt.ylabel("Smoothed Value")
 plt.show()
+
+
+########################################
+# 10. DECOMPOSE BIRTHS TIME SERIES
+########################################
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+birthstimeseriescomponents = seasonal_decompose(
+    birthstimeseries,
+    model='additive',
+    period=12
+)
+
+
+########################################
+# 11. PRINT SEASONAL, TREND, RANDOM COMPONENTS
+########################################
+print("Seasonal Component:\n", birthstimeseriescomponents.seasonal)
+print("\nTrend Component:\n", birthstimeseriescomponents.trend)
+print("\nRandom Component:\n", birthstimeseriescomponents.resid)
+
+
+########################################
+# 12. PLOT OBSERVED, TREND, SEASONAL, RANDOM
+########################################
+fig, axes = plt.subplots(4, 1, figsize=(12, 10), sharex=True)
+
+# Observed
+axes[0].plot(birthstimeseries, label="Observed", color="black")
+axes[0].set_title("Observed")
+axes[0].set_ylabel("Births")
+
+# Trend
+axes[1].plot(birthstimeseriescomponents.trend, label="Trend", color="blue")
+axes[1].set_title("Trend")
+axes[1].set_ylabel("Value")
+
+# Seasonal
+axes[2].plot(birthstimeseriescomponents.seasonal, label="Seasonal", color="green")
+axes[2].set_title("Seasonal")
+axes[2].set_ylabel("Value")
+
+# Random / Residual
+axes[3].plot(birthstimeseriescomponents.resid, label="Random", color="red")
+axes[3].set_title("Random (Residual)")
+axes[3].set_ylabel("Value")
+axes[3].set_xlabel("Time")
+
+plt.tight_layout()
+plt.show()
+

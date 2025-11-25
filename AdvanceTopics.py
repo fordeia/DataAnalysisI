@@ -72,4 +72,26 @@ plt.title("Kings Series")
 plt.xlabel("Observation")
 plt.ylabel("Value")
 plt.show()
+########################################
+# 8. MOVING AVERAGE SMOOTHING (ORDER 3)
+########################################
+kingstimeseriesSMA3 = kingstimeseries.rolling(window=3, center=True).mean()
 
+plt.figure(figsize=(10,4))
+plt.plot(kingstimeseriesSMA3)
+plt.title("Kings Series - Moving Average (Order 3)")
+plt.xlabel("Observation")
+plt.ylabel("Smoothed Value")
+plt.show()
+
+########################################
+# 9. MOVING AVERAGE SMOOTHING (ORDER 8)
+########################################
+kingstimeseriesSMA8 = kingstimeseries.rolling(window=8, center=True).mean()
+
+plt.figure(figsize=(10,4))
+plt.plot(kingstimeseriesSMA8)
+plt.title("Kings Series - Moving Average (Order 8)")
+plt.xlabel("Observation")
+plt.ylabel("Smoothed Value")
+plt.show()

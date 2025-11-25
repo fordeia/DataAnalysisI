@@ -38,3 +38,38 @@ plt.title("Monthly Births in New York (1946 onwards)")
 plt.xlabel("Year")
 plt.ylabel("Number of Births")
 plt.show()
+
+########################################
+# 5. LOAD KINGS DATA
+########################################
+# URL for kings data
+url = "http://robjhyndman.com/tsdldata/misc/kings.dat"
+headers = {'User-Agent': 'Mozilla/5.0'}
+
+# Download data
+response = requests.get(url, headers=headers)
+if response.status_code == 200:
+    # skip first 3 lines (header)
+    data_text = "\n".join(response.text.splitlines()[3:])
+    data = StringIO(data_text)
+    kings = pd.read_csv(data, header=None).squeeze()
+    print("Kings data loaded successfully")
+else:
+    raise Exception("Download failed:", response.status_code)
+
+########################################
+# 6. CREATE KINGS TIME SERIES
+########################################
+kingstimeseries = pd.Series(kings.values)
+print(kingstimeseries.head())
+
+########################################
+# 7. PLOT KINGS TIME SERIES
+########################################
+plt.figure(figsize=(10,4))
+plt.plot(kingstimeseries)
+plt.title("Kings Series")
+plt.xlabel("Observation")
+plt.ylabel("Value")
+plt.show()
+

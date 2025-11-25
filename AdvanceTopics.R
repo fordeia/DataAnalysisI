@@ -1,149 +1,211 @@
+########################################
+# 1. Load Births Data
+########################################
 births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
 birthstimeseries <- ts(births, frequency=12, start=c(1946,1))
 birthstimeseries
 
-#Plotting the timeseries
+########################################
+# 2. Plot Births Time Series
+########################################
 plot.ts(birthstimeseries)
 
-#The kings time series
-kings <- scan("http://robjhyndman.com/tsdldata/misc/kings.dat",skip=3)
+########################################
+# 3. Load Kings Data
+########################################
+kings <- scan("http://robjhyndman.com/tsdldata/misc/kings.dat", skip=3)
 kingstimeseries <- ts(kings)
 plot.ts(kingstimeseries)
 
-#Smoothing the kings data, it is non-seasonal and the fluctuation are roughly the same size hence could be described by a additive model
-
-#Smoothing using a moving average of 3
+########################################
+# 4. Moving Average Smoothing (Order 3)
+########################################
 install.packages("TTR")
 library("TTR")
-kingstimeseriesSMA3 <- SMA(kingstimeseries,n=3)
+kingstimeseriesSMA3 <- SMA(kingstimeseries, n=3)
 plot.ts(kingstimeseriesSMA3)
 
-#Smoothing order 8
-kingstimeseriesSMA8 <- SMA(kingstimeseries,n=8)
+########################################
+# 5. Moving Average Smoothing (Order 8)
+########################################
+kingstimeseriesSMA8 <- SMA(kingstimeseries, n=8)
 plot.ts(kingstimeseriesSMA8)
 
-#To estimate the trend, seasonal and irregular components of this time series, we type:
+########################################
+# 6. Decompose Births Time Series
+########################################
 birthstimeseriescomponents <- decompose(birthstimeseries)
 
-#Outputing the individual components
+########################################
+# 7. Output Seasonal, Trend, Random Components
+########################################
 birthstimeseriescomponents$seasonal
 birthstimeseriescomponents$trend
 birthstimeseriescomponents$random
 
-#Plotting the components
+########################################
+# 8. Plot Time-Series Components
+########################################
 plot(birthstimeseriescomponents)
 
-#Seasonal adjustment
+########################################
+# 9. Seasonal Adjustment
+########################################
 birthstimeseriescomponents <- decompose(birthstimeseries)
 birthstimeseriesseasonallyadjusted <- birthstimeseries - birthstimeseriescomponents$seasonal
 
-#Ploting the adjusted time series
+########################################
+# 10. Plot Seasonally Adjusted Series
+########################################
 plot(birthstimeseriesseasonallyadjusted)
 
-#Rainfall data
-rain <- scan("http://robjhyndman.com/tsdldata/hurst/precip1.dat",skip=1)
-#Read 100 items
-rainseries <- ts(rain,start=c(1813))
+########################################
+# 11. Load Rainfall Data
+########################################
+rain <- scan("http://robjhyndman.com/tsdldata/hurst/precip1.dat", skip=1)
+rainseries <- ts(rain, start=c(1813))
 rainseries
-#plot
+
+########################################
+# 12. Plot Rainfall Time Series
+########################################
 plot.ts(rainseries)
 
-#Simple Exponential Smoothing
+########################################
+# 13. Simple Exponential Smoothing
+########################################
 rainseriesforecasts <- HoltWinters(rainseries, beta=FALSE, gamma=FALSE)
 rainseriesforecasts
 
-#The forcasted time series
+########################################
+# 14. Fitted Values from Smoothing
+########################################
 rainseriesforecasts$fitted
 
-#Plot
+########################################
+# 15. Plot Holt-Winters Model Fit
+########################################
 plot(rainseriesforecasts)
 
-#Sum of square error to estimate accuracy of the forecast. 
+########################################
+# 16. SSE for Forecast Accuracy
+########################################
 rainseriesforecasts$SSE
 
-#Simple Exponential Smoothing using the initial value of the time series
+########################################
+# 17. Simple Exponential Smoothing With Initial Level
+########################################
 HoltWinters(rainseries, beta=FALSE, gamma=FALSE, l.start=23.56)
 
-#Forcasting for time periods outside of the time series
+########################################
+# 18. Forecast Future Values
+########################################
 install.packages("forecast")
 library("forecast")
-
 rainseriesforecasts2 <- forecast(rainseriesforecasts, h=8)
 rainseriesforecasts2
 
-#Plotting prediction for the forecast
+########################################
+# 19. Plot Forecasted Values
+########################################
 plot(rainseriesforecasts2)
 
-#Correlogram to test for auto-correlation
+########################################
+# 20. Correlogram of Residuals
+########################################
 acf(rainseriesforecasts2$residuals, na.action = na.pass, lag.max=20)
 
-#Box test to test for auto-correlation
+########################################
+# 21. Ljung–Box Test for Residual Autocorrelation
+########################################
 Box.test(rainseriesforecasts2$residuals, lag=20, type="Ljung-Box")
 
+##################################################
+############ Principal Component Analysis #########
+##################################################
 
-
-#######Principal Component Analysis########
-
-# Load libraries and data (replace with your data)
+########################################
+# 22. Load Example PCA Data
+########################################
 library(stats)
 library(MASS)
-# Example data
 set.seed(123)
-my_data <- data.frame(x1 = rnorm(100), x2 = rnorm(100), x3 = rnorm(100), outcome = rnorm(100))
+my_data <- data.frame(
+  x1 = rnorm(100),
+  x2 = rnorm(100),
+  x3 = rnorm(100),
+  outcome = rnorm(100)
+)
 
-# 1. PCA
-pca_result <- prcomp(my_data[, 1:3], scale = TRUE, center = TRUE) # Don't include outcome in PCA
+########################################
+# 23. Perform PCA
+########################################
+pca_result <- prcomp(my_data[, 1:3], scale = TRUE, center = TRUE)
 
-# 2. Analyze PCA results
+########################################
+# 24. PCA Summary
+########################################
 summary(pca_result)
 
-#Display the loading with respect to the independent varialbes
+########################################
+# 25. Display Loadings
+########################################
 pca_result
 
-
-# 3. Select components (e.g., first two)
+########################################
+# 26. Select First Two PCs
+########################################
 pca_data <- data.frame(pca_result$x)
 selected_components <- pca_data[, 1:2]
 head(selected_components)
 
-#Scree plot
+########################################
+# 27. Scree Plot
+########################################
 install.packages("factoextra")
 library(factoextra)
 fviz_eig(pca_result, addlabels = TRUE)
 
-#Biplot to display the relationship between the PC and independent variables. 
+########################################
+# 28. PCA Variable Biplot
+########################################
 fviz_pca_var(pca_result, col.var = "black")
 
-# 4. Prepare data for MLR
-regression_data <- data.frame(my_data$outcome, selected_components) # Combine outcome and PCs
+########################################
+# 29. Prepare Data for Regression
+########################################
+regression_data <- data.frame(my_data$outcome, selected_components)
 
-# 5. Perform MLR
+########################################
+# 30. Multiple Linear Regression Using PCs
+########################################**
 regression_model <- lm(my_data$outcome ~ PC1 + PC2, data = regression_data)
 summary(regression_model)
 
-#Assignment of for PCA
+##################################################
+############ PCA Assignment: Iris Dataset #########
+##################################################
+
+########################################
+# 31. Load Iris Data
+########################################
 data("iris")
 str(iris)
 head(iris)
 
-#Finding the PCA
-pc <- prcomp(iris[,-5],
-             center = TRUE,
-            scale. = TRUE)
+########################################
+# 32. Perform PCA on Iris
+########################################
+pc <- prcomp(iris[,-5], center = TRUE, scale. = TRUE)
 summary(pc)
 pc
 
-#Scree plot
+########################################
+# 33. Iris Scree Plot
+########################################
 fviz_eig(pc, addlabels = TRUE)
 
-#Biplot
+########################################
+# 34. Iris PCA Variable Plot
+########################################
 fviz_pca_var(pc, col.var = "black")
-
-
-
-
-
-
-
-
-

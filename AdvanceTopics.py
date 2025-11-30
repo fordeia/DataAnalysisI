@@ -145,4 +145,35 @@ axes[3].set_xlabel("Time")
 
 plt.tight_layout()
 plt.show()
+########################################
+# 13. Seasonal Decomposition (Additive)
+########################################
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+decomp = seasonal_decompose(
+    birthstimeseries,
+    model='additive',
+    period=12
+)
+
+seasonal = decomp.seasonal
+trend = decomp.trend
+resid = decomp.resid
+
+########################################
+# 14. Seasonally Adjusted Series
+########################################
+births_seasonally_adjusted = birthstimeseries - seasonal
+
+########################################
+# 15. Plot: Seasonally Adjusted Series
+########################################
+plt.figure(figsize=(10,4))
+plt.plot(births_seasonally_adjusted, label="Seasonally Adjusted")
+plt.title("Seasonally Adjusted Births Time Series (Additive)")
+plt.xlabel("Year")
+plt.ylabel("Births")
+plt.legend()
+plt.show()
+
 

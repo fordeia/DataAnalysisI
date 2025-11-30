@@ -176,4 +176,24 @@ plt.ylabel("Births")
 plt.legend()
 plt.show()
 
+########################################
+# 16. Load Rainfall Data
+########################################
+url = "http://robjhyndman.com/tsdldata/hurst/precip1.dat"
+headers = {'User-Agent': 'Mozilla/5.0'}
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    data_text = "\n".join(response.text.splitlines()[1:])
+    rain_df = pd.read_csv(StringIO(data_text), header=None)
+    
+    rain_series = pd.Series(
+        rain_df[0].values,
+        index=pd.date_range(start='1813', periods=len(rain_df), freq='Y')
+    )
+    
+    print(rain_series)
+else:
+    raise Exception("Failed to download data")
+
 

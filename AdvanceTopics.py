@@ -280,3 +280,43 @@ residuals = rain_series - ses_model.fittedvalues
 sse = np.sum(residuals**2)
 
 print(f"Sum of Squared Errors (SSE): {sse:.3f}")
+########################################
+# 21. Simple Exponential Smoothing With Initial Level + Forecast
+########################################
+from statsmodels.tsa.holtwinters import SimpleExpSmoothing
+
+# Build model with fixed initial level
+model = SimpleExpSmoothing(
+    rain_series,
+    initialization_method="known",
+    initial_level=23.56
+)
+
+# Fit model (optimize alpha only)
+ses_model = model.fit(
+    smoothing_level=None,
+    optimized=True
+)
+
+# Print model parameters
+print("Alpha (smoothing_level):", ses_model.model.params['smoothing_level'])
+print("Initial level:", ses_model.model.params['initial_level'])
+
+# --- Fitted values (same as R: rainseriesforecasts$fitted) ---
+fitted_values = ses_model.fittedvalues
+print("\nFirst 5 fitted values:")
+print(fitted_values.head())
+
+# --- Forecasts (same as R: predict future periods) ---
+forecast_steps = 10   # choose any number like R’s default of extending future
+forecast_values = ses_model.forecast(forecast_steps)
+
+print("\nForecasts:")
+print(forecast_values)
+
+
+print("Alpha (smoothing_level):", ses_model.model.params['smoothing_level'])
+print("Initial level:", ses_model.model.params['initial_level'])
+print("\nModel summary:")
+print(ses_model.summary())
+

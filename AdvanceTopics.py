@@ -254,3 +254,18 @@ fitted_values = ses_model.fittedvalues
 
 # Print first 5 fitted values
 print(fitted_values.head())
+########################################
+# 20. Plot Holt-Winters Model Fit (Simple Exponential Smoothing)
+########################################
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12,6))
+plt.plot(rain_series.index, rain_series, label='Observed', color='black', linewidth=1)
+plt.plot(ses_model.fittedvalues.index, ses_model.fittedvalues, label='Fitted (Smoothed Level)', color='red', linewidth=2)
+plt.title('Holt-Winters Filtering (Simple Exponential Smoothing)')
+plt.xlabel('Year')
+plt.ylabel('Rainfall')
+plt.legend()
+plt.grid(True)
+plt.show()
+

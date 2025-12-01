@@ -226,3 +226,15 @@ plt.grid(True)
 plt.xlim(pd.Timestamp('1813'), pd.Timestamp('1920'))
 
 plt.show()
+########################################
+# 18. Simple Exponential Smoothing (Python equivalent of HoltWinters with beta=FALSE, gamma=FALSE)
+########################################
+from statsmodels.tsa.holtwinters import SimpleExpSmoothing
+
+# Fit simple exponential smoothing model (no trend, no seasonality)
+ses_model = SimpleExpSmoothing(rain_series).fit()
+
+# Print smoothing parameter and model info
+print("Smoothing parameter (alpha):", ses_model.model.params['smoothing_level'])
+print("\nModel summary:")
+print(ses_model.summary())

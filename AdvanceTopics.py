@@ -177,23 +177,52 @@ plt.legend()
 plt.show()
 
 ########################################
-# 16. Load Rainfall Data
+# 16. Load Rainfall Data (corrected index)
 ########################################
 url = "http://robjhyndman.com/tsdldata/hurst/precip1.dat"
 headers = {'User-Agent': 'Mozilla/5.0'}
 response = requests.get(url, headers=headers)
 
 if response.status_code == 200:
+    # Skip the header line
     data_text = "\n".join(response.text.splitlines()[1:])
-    rain_df = pd.read_csv(StringIO(data_text), header=None)
-    
-    rain_series = pd.Series(
-        rain_df[0].values,
-        index=pd.date_range(start='1813', periods=len(rain_df), freq='Y')
-    )
-    
-    print(rain_series)
+
+    # Read fixed-width file without header
+    rain_df = pd.read_fwf(StringIO(data_text), header=None)
+
+    # Flatten the dataframe into a 1D array
+    rain_values = rain_df.values.flatten()
+
+    # Convert to numeric and drop any non-numeric entries
+    rain_values = pd.to_numeric(rain_values, errors='coerce')
+    rain_values = rain_values[~pd.isna(rain_values)]
+
+    # Create proper yearly index with 100 periods from 1813
+    rain_index = pd.date_range(start='1813', periods=len(rain_values), freq='YE')
+
+    # Make the series
+    rain_series = pd.Series(rain_values, index=rain_index, name='Rainfall')
+
+    # Print first and last 5 entries
+    print("First 5 years:")
+    print(rain_series.head())
+    print("\nLast 5 years:")
+    print(rain_series.tail())
+
 else:
     raise Exception("Failed to download data")
 
+########################################
+# 17. Plot Rainfall Time Series
+########################################
+plt.figure(figsize=(12,6))
+rain_series.plot(color='blue', linewidth=1)
+plt.title('Annual Rainfall Time Series (1813–1912)')
+plt.xlabel('Year')
+plt.ylabel('Rainfall')
+plt.grid(True)
 
+# Extend x-axis to 1920
+plt.xlim(pd.Timestamp('1813'), pd.Timestamp('1920'))
+
+plt.show()

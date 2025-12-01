@@ -246,3 +246,11 @@ print("Initial level (a):", ses_model.model.params['initial_level'])
 print("\nModel summary:")
 print(ses_model.summary())
 
+########################################
+# 19. Fitted Values from Simple Exponential Smoothing
+########################################
+# Access fitted values from the SES model
+fitted_values = ses_model.fittedvalues
+
+# Print first 5 fitted values
+print(fitted_values.head())

@@ -349,3 +349,13 @@ plt.ylabel("Rainfall")
 plt.grid(True)
 plt.legend()
 plt.show()
+
+########################################
+# 23. Correlogram of Residuals
+########################################
+from statsmodels.graphics.tsaplots import plot_acf
+
+# Plot ACF for residuals
+plot_acf(ses_model.resid, lags=20, alpha=0.05)
+plt.title("Correlogram of Residuals")
+plt.show()

@@ -320,3 +320,32 @@ print("Initial level:", ses_model.model.params['initial_level'])
 print("\nModel summary:")
 print(ses_model.summary())
 
+########################################
+# 22. Plot Forecasted Values (Python equivalent of plot(rainseriesforecasts2))
+########################################
+import matplotlib.pyplot as plt
+
+# Number of steps to forecast (same used when calling ses_model.forecast())
+forecast_steps = 10
+forecast_values = ses_model.forecast(forecast_steps)
+
+plt.figure(figsize=(12,6))
+
+# Plot original rainfall series
+plt.plot(rain_series, label="Observed", color="black")
+
+# Plot fitted values
+plt.plot(ses_model.fittedvalues, label="Fitted", color="blue")
+
+# Plot forecast
+plt.plot(forecast_values, label="Forecast", color="red")
+
+# Extend x-axis a bit into the future
+plt.xlim(rain_series.index[0], forecast_values.index[-1])
+
+plt.title("Simple Exponential Smoothing – Fitted Values and Forecast")
+plt.xlabel("Year")
+plt.ylabel("Rainfall")
+plt.grid(True)
+plt.legend()
+plt.show()

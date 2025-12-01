@@ -359,3 +359,13 @@ from statsmodels.graphics.tsaplots import plot_acf
 plot_acf(ses_model.resid, lags=20, alpha=0.05)
 plt.title("Correlogram of Residuals")
 plt.show()
+
+########################################
+# 24. Ljung–Box Test for Residual Autocorrelation
+########################################
+from statsmodels.stats.diagnostic import acorr_ljungbox
+
+# Perform Ljung-Box test on residuals with 20 lags
+ljung_box_results = acorr_ljungbox(ses_model.resid, lags=[20], return_df=True)
+
+print(ljung_box_results)

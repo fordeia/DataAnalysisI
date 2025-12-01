@@ -268,4 +268,15 @@ plt.ylabel('Rainfall')
 plt.legend()
 plt.grid(True)
 plt.show()
+########################################
+# 21. Calculate SSE for Forecast Accuracy
+########################################
+import numpy as np
 
+# Calculate residuals: observed - fitted
+residuals = rain_series - ses_model.fittedvalues
+
+# Calculate SSE as sum of squared residuals
+sse = np.sum(residuals**2)
+
+print(f"Sum of Squared Errors (SSE): {sse:.3f}")
